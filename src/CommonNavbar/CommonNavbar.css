@@ -1,0 +1,15 @@
+#common-navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#common-navbar-container > #brand-name-container {
+    margin-left: 1em;
+}
+
+#common-navbar-container > #authentification-container {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+}
