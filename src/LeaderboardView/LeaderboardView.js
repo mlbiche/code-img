@@ -3,22 +3,34 @@ import UserScore, { UPLOAD_SCORE, REACTION_SCORE } from '../UserScore/UserScore'
 
 import './LeaderboardView.css';
 
+const MOCKUP_UPLOAD_SCORES = [
+  { username: 'Krystine', score: 20 },
+  { username: 'Irma', score: 14 },
+  { username: 'Maureen', score: 13 },
+  { username: 'Ursella', score: 6 },
+  { username: 'Sherley', score: 5 }
+];
+
+const MOCKUP_REACTION_SCORES = [
+  { username: 'Lexus', score: 46 },
+  { username: 'Ern', score: 43 },
+  { username: 'Blaine', score: 34 },
+  { username: 'Cody', score: 30 },
+  { username: 'Mario', score: 22 }
+];
+
 function LeaderboardView() {
   return (
     <div id="learderboard-container">
       <h2 id="learderboard-title">Leaderboard</h2>
       <h3>Best uploaders</h3>
-      <UserScore type={UPLOAD_SCORE} username="Krystine" score={20} />
-      <UserScore type={UPLOAD_SCORE} username="Irma" score={14} />
-      <UserScore type={UPLOAD_SCORE} username="Maureen" score={13} />
-      <UserScore type={UPLOAD_SCORE} username="Ursella" score={6} />
-      <UserScore type={UPLOAD_SCORE} username="Sherley" score={5} />
+      {MOCKUP_UPLOAD_SCORES.map((mockupUploadScore) => (
+        <UserScore type={UPLOAD_SCORE} username={mockupUploadScore.username} score={mockupUploadScore.score} />
+      ))}
       <h3>Most appreciated</h3>
-      <UserScore type={REACTION_SCORE} username="Lexus" score={46} />
-      <UserScore type={REACTION_SCORE} username="Ern" score={43} />
-      <UserScore type={REACTION_SCORE} username="Blaine" score={34} />
-      <UserScore type={REACTION_SCORE} username="Cody" score={30} />
-      <UserScore type={REACTION_SCORE} username="Mario" score={22} />
+      {MOCKUP_REACTION_SCORES.map((mockupReactionScore) => (
+        <UserScore type={REACTION_SCORE} username={mockupReactionScore.username} score={mockupReactionScore.score} />
+      ))}
     </div>
   );
 }
