@@ -4,11 +4,11 @@
   justify-content: space-between;
 }
 
-#common-navbar-container>#brand-name-container {
+#common-navbar-container > #brand-name-container {
   margin-left: 1em;
 }
 
-#common-navbar-container>#authentification-container {
+#common-navbar-container > #authentification-container {
   display: flex;
   align-items: center;
   margin-right: 1em;
