@@ -3,6 +3,7 @@ import UserScore, { UPLOAD_SCORE, REACTION_SCORE } from '../UserScore/UserScore'
 
 import './LeaderboardView.css';
 
+// Mock up upload User scores object constants
 const MOCKUP_UPLOAD_SCORES = [
   { username: 'Krystine', score: 20 },
   { username: 'Irma', score: 14 },
@@ -11,6 +12,7 @@ const MOCKUP_UPLOAD_SCORES = [
   { username: 'Sherley', score: 5 }
 ];
 
+// Mock up upload User scores object constants
 const MOCKUP_REACTION_SCORES = [
   { username: 'Lexus', score: 46 },
   { username: 'Ern', score: 43 },

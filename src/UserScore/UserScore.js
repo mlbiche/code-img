@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import './UserScore.css';
 
+// UserScore type constants
 export const UPLOAD_SCORE = 'upload-score';
 export const REACTION_SCORE = 'reaction-score';
 
