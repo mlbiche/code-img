@@ -21,15 +21,20 @@ const MOCKUP_REACTION_SCORES = [
   { username: 'Mario', score: 22 }
 ];
 
+/**
+ * LeaderboardView Component
+ */
 function LeaderboardView() {
   return (
     <div id="learderboard-container">
       <h2 id="learderboard-title">Leaderboard</h2>
       <h3>Best uploaders</h3>
+      {/* Display all the upload scores in different UserScore component */}
       {MOCKUP_UPLOAD_SCORES.map((mockupUploadScore) => (
         <UserScore type={UPLOAD_SCORE} username={mockupUploadScore.username} score={mockupUploadScore.score} />
       ))}
       <h3>Most appreciated</h3>
+      {/* Display all the reaction scores in different UserScore component */}
       {MOCKUP_REACTION_SCORES.map((mockupReactionScore) => (
         <UserScore type={REACTION_SCORE} username={mockupReactionScore.username} score={mockupReactionScore.score} />
       ))}
