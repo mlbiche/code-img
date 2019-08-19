@@ -1,0 +1,12 @@
+#FronPageView-container {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin: 0 auto 2rem auto;
+  }
+  
+  #FrontPageView-container > #FrontPage-title {
+    margin-left: 1em;
+   }
+    
+  

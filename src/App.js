@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CommonNavbar from './CommonNavbar/CommonNavbar';
 import LeaderboardView from './LeaderboardView/LeaderboardView';
+// import Discussion from './Discussion/Discussion';
+import FrontPageView from './FrontPageView/FrontPageView';
 
 function App() {
   return (
@@ -12,9 +14,8 @@ function App() {
     <Router>
       {/* Add the CommonNavbar component as it is present in all views */}
       <CommonNavbar />
-
       {/* Define the different routes */}
-      <Route exact path='/' /> {/* TODO : Add Front Page component */}
+      <Route exact path='/' component={FrontPageView}  /> 
       <Route exact path='/discussion/:id' /> {/* TODO : Add discussion component */}
       <Route exact path='/leaderboard' component={LeaderboardView} />
     </Router>

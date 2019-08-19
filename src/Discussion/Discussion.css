@@ -1,0 +1,11 @@
+ #discusson-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto 2rem auto;
+}
+
+img{
+  width: 5em;
+  height: 3em;
+}
