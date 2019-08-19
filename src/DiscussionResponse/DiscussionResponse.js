@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 
 import './DiscussionResponse.css';
 
-function DiscussionResponse({username, date, img, reactions}) {
+/**
+ * DiscussionResponse component
+ * @param username The response author name
+ * @param date The date on which the response has been posted
+ * @param img The response image
+ * @param reactions The reactions given to the response
+ */
+function DiscussionResponse({ username, date, img, reactions }) {
   return (
-    <div>
+    <div className="discussion-response-container">
       <div className="discussion-response-header">
         <h2>{username}</h2>
         <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
