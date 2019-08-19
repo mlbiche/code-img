@@ -1,0 +1,10 @@
+.discussion-responses-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.discussion-responses-container > * {
+  width: 50%;
+}
