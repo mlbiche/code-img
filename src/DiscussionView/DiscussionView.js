@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
+import UploadImage from '../UploadImage/UploadImage';
 
 import './DiscussionView.css';
-import UploadImage from '../UploadImage/UploadImage';
 
 // Mock up Discussions object constants
 const MOCKUP_DISCUSSIONS = [
@@ -53,5 +54,18 @@ function DiscussionView({ match }) {
     </div>
   );
 }
+
+/**
+ * Define the component property types
+ * It expect the react-router match property, containing a object params with
+ * a id key.
+ */
+DiscussionView.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired
+};
 
 export default DiscussionView;
