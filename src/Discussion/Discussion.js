@@ -4,8 +4,11 @@ import './Discussion.css';
 
 function Discussion({ username, date, image }) {
   return (
-    <div className="discusson-container">
-      <h3>{username} {date.toDateString()} </h3>
+    <div className="discussion-container">
+      <div className="discussion-header">
+        <h3>{username}</h3>
+        <span className="discussion-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
+      </div>
       <img src={image} alt={image} />
     </div>
   );
