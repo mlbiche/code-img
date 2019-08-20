@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './CommonNavbar.css'
 
 /**
@@ -7,9 +9,11 @@ import './CommonNavbar.css'
 function CommonNavbar() {
   return (
     <div id="common-navbar-container">
-      <div id="brand-name-container">
-        <h1>Code-img</h1>
-      </div>
+      <Link to='/' id="brand-name-link">
+        <div id="brand-name-container">
+          <h1>Code-img</h1>
+        </div>
+      </Link>
       <div id="authentification-container">
         <button>Sign in</button>
         <button>Register</button>

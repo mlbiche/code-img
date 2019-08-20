@@ -1,0 +1,25 @@
+.discussion-response-container {
+  border-bottom: 1px solid black;
+}
+
+.discussion-response-container > .discussion-response-header > h2 {
+  font-size: 12pt;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.discussion-response-container > .discussion-response-header > .discussion-response-date {
+  font-style: italic;
+  color: grey;
+  font-size: 10pt;
+}
+
+.discussion-response-container > .discussion-response-content {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.discussion-response-container > .discussion-response-content > img {
+  max-height: 300px;
+}

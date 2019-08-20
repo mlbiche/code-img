@@ -4,6 +4,11 @@
   justify-content: space-between;
 }
 
+#common-navbar-container > #brand-name-link {
+  text-decoration: none;
+  color: black;
+}
+
 #common-navbar-container > #brand-name-container {
   margin-left: 1em;
 }
