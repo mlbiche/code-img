@@ -1,15 +1,8 @@
 import React from 'react';
 import Discussion from '../Discussion/Discussion';
+import { MOCKUP_DISCUSSIONS } from '../DiscussionView/DiscussionView';
 
-import './FrontPageView.css'
-
-const MOCKUP_DISCUSSIONS = [
-  { username: 'Krystine', date: new Date(), image: require('../mock-img/books-3733892_640.jpg') },
-  { username: 'Irma', date: new Date(), image: require('../mock-img/mountain-4387827_640.jpg') },
-  { username: 'Maureen', date: new Date(), image: require('../mock-img/nature-4353699_640.jpg') },
-  { username: 'Ursella', date: new Date(), image: require('../mock-img/plane-4301615_640.png') },
-  { username: 'Sherley', date: new Date(), image: require('../mock-img/sunset-4405820_640.jpg') }
-];
+import './FrontPageView.css';
 
 function FrontPageView() {
   return (
@@ -21,9 +14,12 @@ function FrontPageView() {
         {
           MOCKUP_DISCUSSIONS.map((mockup_discussion) => (
             <Discussion
-              username={mockup_discussion.username}
-              date={mockup_discussion.date}
-              image={mockup_discussion.image} />
+              id={mockup_discussion.id}
+              username={mockup_discussion.responses[0].username}
+              date={mockup_discussion.responses[0].date}
+              image={mockup_discussion.responses[0].img}
+              key={mockup_discussion.id}
+            />
           ))
         }
       </div>

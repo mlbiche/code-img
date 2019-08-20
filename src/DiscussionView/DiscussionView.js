@@ -6,26 +6,62 @@ import UploadImage from '../UploadImage/UploadImage';
 import './DiscussionView.css';
 
 // Mock up Discussions object constants
-const MOCKUP_DISCUSSIONS = [
+export const MOCKUP_DISCUSSIONS = [
   {
     id: 0,
     responses: [
-      { id: 0, username: 'Krystine', date: new Date(), img: 'image1', reactions: [] },
-      { id: 1, username: 'Ern', date: new Date(), img: 'image2', reactions: [] },
-      { id: 2, username: 'Krystine', date: new Date(), img: 'image3', reactions: [] }
+      { 
+        id: 0,
+        username: 'Krystine',
+        date: new Date(),
+        img: require('../mock-img/books-3733892_640.jpg'),
+        reactions: []
+      },
+      { 
+        id: 1,
+        username: 'Ern',
+        date: new Date(),
+        img: require('../mock-img/mountain-4387827_640.jpg'),
+        reactions: []
+      },
+      { 
+        id: 2,
+        username: 'Krystine',
+        date: new Date(),
+        img: require('../mock-img/nature-4353699_640.jpg'),
+        reactions: []
+      }
     ]
   },
   {
     id: 1,
     responses: [
-      { id: 3, username: 'Cody', date: new Date(), img: 'image4', reactions: [] },
-      { id: 4, username: 'Blaine', date: new Date(), img: 'image5', reactions: [] }
+      {
+        id: 3,
+        username: 'Cody',
+        date: new Date(),
+        img: require('../mock-img/plane-4301615_640.png'),
+        reactions: []
+      },
+      {
+        id: 4,
+        username: 'Blaine',
+        date: new Date(),
+        img: require('../mock-img/sunset-4405820_640.jpg'),
+        reactions: []
+      }
     ]
   },
   {
     id: 2,
     responses: [
-      { id: 5, username: 'Ursella', date: new Date(), img: 'image6', reactions: [] }
+      {
+        id: 5,
+        username: 'Ursella',
+        date: new Date(),
+        img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),
+        reactions: []
+      }
     ]
   }
 ];
