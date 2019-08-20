@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CommonNavbar from './CommonNavbar/CommonNavbar';
 import LeaderboardView from './LeaderboardView/LeaderboardView';
 import DiscussionView from './DiscussionView/DiscussionView';
+import FrontPageView from './FrontPageView/FrontPageView';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <CommonNavbar />
 
       {/* Define the different routes */}
-      <Route exact path='/' /> {/* TODO : Add Front Page component */}
+      <Route exact path='/' component={FrontPageView} /> 
       <Route exact path='/discussion/:id' component={DiscussionView} />
       <Route exact path='/leaderboard' component={LeaderboardView} />
     </Router>
