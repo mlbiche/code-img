@@ -6,17 +6,22 @@
   margin-bottom: 2rem;
 }
 
-.discussion-container > .discussion-header {
+.discussion-container > .discussion-header-link {
+  text-decoration: none;
+  color: black;
+}
+
+.discussion-container .discussion-header {
   margin-bottom: 0.5rem;
 }
 
-.discussion-container > .discussion-header > h3 {
+.discussion-container .discussion-header > h3 {
   font-size: 12pt;
   font-weight: normal;
   margin-bottom: 0;
 }
 
-.discussion-container > .discussion-header > .discussion-date {
+.discussion-container .discussion-header > .discussion-date {
   font-style: italic;
   color: grey;
   font-size: 10pt;
