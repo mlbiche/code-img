@@ -1,11 +1,11 @@
- #discusson-container {
+.discusson-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin: 0 auto 2rem auto;
+  align-items: center;
+  width: 30%;
+  margin-bottom: 2rem;
 }
 
-img{
-  width: 5em;
-  height: 3em;
+.discusson-container > img{
+  max-height: 150px;
 }
