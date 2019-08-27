@@ -1,0 +1,10 @@
+#front-page-navbar-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+}
+
+.front-page-navbar-button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
