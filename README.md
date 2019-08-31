@@ -6,6 +6,15 @@ Authors: Zinh Al-Sweedy, Thibaud Malbert
 
 This Web Application is a discussion thread only based on images and reactions.
 
+## Coding conventions
+
+The entire project shoudl respect the following defined coding conventions :
+
+* Indentation is composed by two spaces, as defined by React.js.
+* Components `.js` and `.css` files are placed in a same folder specific to the component.
+* JavaScript code use single quote for string while HTML code use double quotes.<br />
+*Ex : `import './Leaderboard.css'` / `<div id="my-id"></div>`*
+
 ## Available Scripts
 
 In the project directory, you can run:
