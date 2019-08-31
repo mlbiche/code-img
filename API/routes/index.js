@@ -9,4 +9,7 @@ const express = require('express');
 
 const router = express.Router();
 
+// Provide the router to all endpoints
+require('./authentication')(router);
+
 module.exports = router;
