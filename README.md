@@ -6,6 +6,8 @@ Authors: Zinh Al-Sweedy, Thibaud Malbert
 
 This Web Application is a discussion thread only based on images and reactions.
 
+The front-end is developped using React.js and the RESTful API *(see folder `/API`)* is developped using Express.js.
+
 ## Coding conventions
 
 The entire project shoudl respect the following defined coding conventions :
@@ -17,6 +19,20 @@ The entire project shoudl respect the following defined coding conventions :
 * Method names do not start with an underscore.
 * Folder and file names use Pascal Case. <br />
 *Ex: `FrontPageView.js`*
+* CSS stylesheet is the last import in `.js` file, seperated by an empty line from other imports.
+* JavaScript variable names use Lower Camel Case.<br />
+*Ex : `const myVariable = 2;`*
+* JavaScript lines end with a semi-colon.
+* HTML/CSS `id`s and `class`es names use lower case letters and each composing word is separated with a dash.<br />
+*Ex : `<div id="my-id"></div>`*
+* Components corresponding to a route have name ending with *View*.<br />
+*Ex : `LeaderboardView`*
+* The default export for components JavaScript file is the last line of the file, seperated by an empty line from the rest of the code.
+* All component JavaScript files must be documented, with at list a header comment on top of the class or function definition.
+* Components are defined using function as often as it is enough.
+* All JavaScript functions must have a header comment defining the function purpose, parameters and the return.
+* For classes and functions definitions, conditional and loop statements and CSS rules, the opening curly brace is placed at the end of the line, seperated by a space.<br />
+*Ex : `function LeaderboardView() {`*
 
 ## Available Scripts
 
