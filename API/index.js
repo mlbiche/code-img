@@ -1,5 +1,6 @@
 const express = require('express');
 const router = require('./routes');
+const db = require('./model/db'); // Load the MongoDB database
 
 const PORT = 3000;
 

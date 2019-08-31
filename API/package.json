@@ -15,6 +15,7 @@
   "homepage": "https://github.com/tmlb/code-img#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-validator": "^6.2.0"
+    "express-validator": "^6.2.0",
+    "mongoose": "^5.6.11"
   }
 }

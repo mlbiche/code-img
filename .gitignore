@@ -8,6 +8,7 @@
 
 # testing
 /coverage
+/API/test_db
 
 # production
 /build

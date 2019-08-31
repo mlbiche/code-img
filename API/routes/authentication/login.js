@@ -2,7 +2,7 @@
  * POST /login endpoint
  * 
  * Routing developped using https://expressjs.com/en/4x/api.html#router
- * Validationd developped using https://express-validator.github.io/docs/index.html
+ * Validation developped using https://express-validator.github.io/docs/index.html
  */
 
 const { body, validationResult } = require('express-validator');

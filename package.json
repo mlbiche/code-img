@@ -14,6 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "start-db": "mongod --dbpath=./API/test_db",
     "start-api": "node ./API/index.js",
     "test-api": "echo \"Error: no test specified\" && exit 1"
   },
