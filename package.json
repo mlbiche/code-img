@@ -13,7 +13,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start-api": "node ./API/index.js",
+    "test-api": "echo \"Error: no test specified\" && exit 1"
   },
   "eslintConfig": {
     "extends": "react-app"
