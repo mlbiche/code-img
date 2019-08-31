@@ -39,3 +39,18 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+
+not using underscore infornt of the methods name
+Folder naming : use  use Pascal Case for filenames. 
+File naming Filename: use Pascal Case for filenames. 
+Ex:FrontPageView.js
+image: include an alt prop on <img> tags
+using component self-close tags that have no children 
+use a return value in the render method
+with reaturn if more than one element used to be return always wrap it in one div containing the children
+not using underscore infornt of the methods name
+checking the code work before doing push 
+split the code into multiple components
+use dynamic render to map our data in the array
+using React ternary operators in our code style
