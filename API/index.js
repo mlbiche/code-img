@@ -5,8 +5,6 @@ const PORT = 3000;
 const app = express();
 
 app.get('/login', (req, res) => {
- req.params.username
- req.params.password
 
 });
 
