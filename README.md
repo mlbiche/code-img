@@ -78,7 +78,14 @@ Launches the MongoDB database.<br />
 Runs the RESTful API server in the development mode on port 3000.<br />
 **WARNING : Always run launch the MondoDB database (`npm run start-db`) in another terminal before starting the API (`npm run start-api`).**
 
-
 ### `npm run test-api`
 
 Launches the test runner for the RESTful API server.
+
+### `npm run drop-db`
+
+Delete the full MongoDB test database.
+
+### `npm run drop-start-db`
+
+Delete the full MongoDB test database and launch a fresh one. *(Combination of `npm run drop-db` and `npm run start-db`)*

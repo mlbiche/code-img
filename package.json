@@ -16,7 +16,9 @@
     "eject": "react-scripts eject",
     "start-db": "mongod --dbpath=./API/test_db",
     "start-api": "node ./API/index.js",
-    "test-api": "echo \"Error: no test specified\" && exit 1"
+    "test-api": "echo \"Error: no test specified\" && exit 1",
+    "drop-db": "rm -r ./API/test_db && mkdir ./API/test_db",
+    "drop-start-db": "npm run drop-db && npm run start-db"
   },
   "eslintConfig": {
     "extends": "react-app"
