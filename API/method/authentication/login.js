@@ -8,6 +8,7 @@
 
 const { User } = require('../../model');
 const jwt = require('jsonwebtoken');
+const { CredentialsMismatchError } = require('../../common/errors');
 
 /**
  * Check the provided credentials for user login
@@ -18,24 +19,23 @@ const jwt = require('jsonwebtoken');
 module.exports = async (email, password) => {
   try {
     // Search for a user in the database with the corresponding 
-    const user = await User.findOne({ email: email, password: password });
+    const user = await User.findOne({ email: email, password: password })
+    // Throw a CredentialsMismatchError on failure
+      .orFail(new CredentialsMismatchError());
 
     // Generate random secret key for encrypting the JSON Web Token
     const secretKey = require('crypto').randomBytes(64).toString('hex');
 
     // Update the user with the generated secret key
-    await User.updateOne({ _id: user._id }, { secretKey: secretKey });
+    await User.updateOne({ _id: user._id }, { secretKey: secretKey })
+      .orFail(new Error('Secret key update failure'));
 
     // Encrypt the JSON Web Token using the user ID valid for 12 hours
     const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "12h" });
 
-    console.log(`Connection success (userId: ${user._id})!`);
-
     return token;
   } catch (err) {
-    // When the database query fails (credentials mismatch)
-    console.log(`Connection failure (email: ${email})...`);
-
-    return '';
+    // Propagate the error
+    throw err;
   }
 };
