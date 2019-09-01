@@ -38,6 +38,10 @@ module.exports = (router) => {
         const token = await loginMethod(req.body.email, req.body.password);
 
         console.log(`Connection success (email: ${req.body.email})!`);
+
+        // Send the generated token as a Set-Cookie HTTP packet
+        res.cookie('sessionToken', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true });
+        res.end();
       } catch (err) {
         switch (err.name) {
           case CredentialsMismatchError.name:
