@@ -1,3 +1,11 @@
+/**
+ * Login method
+ * Check that the provided username and the password match with a database document.
+ * If so, generate the signed JSON Web Token and return it.
+ * 
+ * JWT generation developped using https://www.npmjs.com/package/jsonwebtoken#usage
+ */
+
 const { User } = require('../../model');
 const jwt = require('jsonwebtoken');
 
@@ -7,23 +15,27 @@ const jwt = require('jsonwebtoken');
  * @param password The hashed salted password
  * @return The generated token if logging in succeed, an empty string otherwise
  */
-module.exports = (email, password) => {
-  // Search for a user in the database with the corresponding 
-  User.findOne({ email: email, password: password }, (err, matchedUser) => {
-    if (err) {
-      console.log(`Connection failure (email: ${email})...`);
-
-      return '';
-    }
+module.exports = async (email, password) => {
+  try {
+    // Search for a user in the database with the corresponding 
+    const user = await User.findOne({ email: email, password: password });
 
     // Generate random secret key for encrypting the JSON Web Token
-    const key = require('crypto').randomBytes(64).toString('hex');
+    const secretKey = require('crypto').randomBytes(64).toString('hex');
 
-    // Encrypt the JSON Web Token using the user ID
-    const token = jwt.sign({ userId: matchedUser._id }, key);
+    // Update the user with the generated secret key
+    await User.updateOne({ _id: user._id }, { secretKey: secretKey });
 
-    console.log(`Connection success (userId: ${matchedUser._id})!`);
+    // Encrypt the JSON Web Token using the user ID valid for 12 hours
+    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "12h" });
+
+    console.log(`Connection success (userId: ${user._id})!`);
 
     return token;
-  });
+  } catch (err) {
+    // When the database query fails (credentials mismatch)
+    console.log(`Connection failure (email: ${email})...`);
+
+    return '';
+  }
 };
