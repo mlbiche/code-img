@@ -7,6 +7,7 @@
 
 const { body, validationResult } = require('express-validator');
 const loginMethod = require('../../method/authentication/login');
+const { CredentialsMismatchError } = require('../../common/errors');
 
 /**
  * POST /login endpoint
@@ -22,7 +23,7 @@ module.exports = (router) => {
       body('email').isEmail(),
       body('password').not().isEmpty()
     ],
-    (req, res) => {
+    async (req, res) => {
       // Check if validation has failed. Send a 422 HTTP Error code if it has
       const errors = validationResult(req);
 
@@ -31,8 +32,27 @@ module.exports = (router) => {
         return res.status(422).json({ errors: errors.array() });
       }
 
-      console.log(`POST /login. email: ${req.body.email}`);
+      console.log(`POST /login (email: ${req.body.email})`);
 
-      loginMethod(req.body.email, req.body.password);
+      try {
+        const token = await loginMethod(req.body.email, req.body.password);
+
+        console.log(`Connection success (email: ${req.body.email})!`);
+      } catch (err) {
+        switch (err.name) {
+          case CredentialsMismatchError.name:
+            console.log(`Connection failure : credentials mismatch (email: ${req.body.email})...`);
+
+            // Send Unauthorized HTTP code on credentials mismatch
+            res.status(401).end();
+            break;
+          default:
+            console.log(`Connection failure : internal error (email: ${req.body.email})...`);
+
+            // Send Internal Error HTTP code
+            res.status(500).end();
+            break;
+        }
+      }
     });
 };
