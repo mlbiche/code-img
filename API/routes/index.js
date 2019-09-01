@@ -6,7 +6,6 @@
  */
 
 const express = require('express');
-
 const router = express.Router();
 
 // Provide the router to all endpoints

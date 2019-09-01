@@ -6,6 +6,7 @@
  */
 
 const { body, validationResult } = require('express-validator');
+const loginMethod = require('../../method/authentication/login');
 
 /**
  * POST /login endpoint
@@ -32,6 +33,6 @@ module.exports = (router) => {
 
       console.log(`POST /login. email: ${req.body.email}`);
 
-      // TODO : Implement the /login endpoint
+      loginMethod(req.body.email, req.body.password);
     });
 };
