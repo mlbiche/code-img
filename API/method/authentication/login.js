@@ -6,6 +6,7 @@
  * JWT generation developped using https://www.npmjs.com/package/jsonwebtoken#usage
  */
 
+const argon2 = require('argon2');
 const { User } = require('../../model');
 const jwt = require('jsonwebtoken');
 const { CredentialsMismatchError } = require('../../common/errors');
@@ -19,9 +20,13 @@ const { CredentialsMismatchError } = require('../../common/errors');
 module.exports = async (email, password) => {
   try {
     // Search for a user in the database with the corresponding 
-    const user = await User.findOne({ email: email, password: password })
-    // Throw a CredentialsMismatchError on failure
+    const user = await User.findOne({ email: email })
+    // Throw a CredentialsMismatchError on failure when user is not found
       .orFail(new CredentialsMismatchError());
+
+    // Check if the password matches
+    if (!await argon2.verify(user.password, password))
+      throw new CredentialsMismatchError();
 
     // Generate random secret key for encrypting the JSON Web Token
     const secretKey = require('crypto').randomBytes(64).toString('hex');
