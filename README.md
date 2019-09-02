@@ -68,24 +68,29 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### `npm run start-db`
+### API folder: `npm run start-db`
 
 Launches the MongoDB database.<br />
-**WARNING : Always run launch the MondoDB database (`npm run start-db`) in another terminal before starting the API (`npm run start-api`).**
+**WARNING: Always run launch the MondoDB database (`npm run start-db`) in another terminal before starting the API (`npm run start-api`).**<br />
+**WARNING: Excute it in ./API folder.**
 
-### `npm run start-api`
+### API folder: `npm run start-api`
 
 Runs the RESTful API server in the development mode on port 3000.<br />
-**WARNING : Always run launch the MondoDB database (`npm run start-db`) in another terminal before starting the API (`npm run start-api`).**
+**WARNING: Always run launch the MondoDB database (`npm run start-db`) in another terminal before starting the API (`npm run start-api`).**<br />
+**WARNING: Excute it in ./API folder.**
 
-### `npm run test-api`
+### API folder: `npm run test-api`
 
-Launches the test runner for the RESTful API server.
+Launches the test runner for the RESTful API server.<br />
+**WARNING: Excute it in ./API folder.**
 
-### `npm run drop-db`
+### API folder: `npm run drop-db`
 
-Delete the full MongoDB test database.
+Delete the full MongoDB test database.<br />
+**WARNING: Excute it in ./API folder.**
 
-### `npm run drop-start-db`
+### API folder: `npm run drop-start-db`
 
-Delete the full MongoDB test database and launch a fresh one. *(Combination of `npm run drop-db` and `npm run start-db`)*
+Delete the full MongoDB test database and launch a fresh one. *(Combination of `npm run drop-db` and `npm run start-db`)*<br />
+**WARNING: Excute it in ./API folder.**
