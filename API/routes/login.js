@@ -6,8 +6,8 @@
  */
 
 const { body, validationResult } = require('express-validator');
-const loginMethod = require('../../method/authentication/login');
-const { CredentialsMismatchError } = require('../../common/errors');
+const loginMethod = require('../method/authentication/login');
+const { CredentialsMismatchError } = require('../common/errors');
 
 /**
  * POST /login endpoint
