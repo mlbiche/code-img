@@ -10,5 +10,6 @@ const router = express.Router();
 
 // Provide the router to all endpoints
 require('./login')(router);
+require('./calculate')(router);
 
 module.exports = router;

@@ -7,3 +7,4 @@
 const mongoose = require('mongoose');
 
 module.exports.User = mongoose.model('User', require('./schema/user'));
+module.exports.Commission = mongoose.model('Commission', require('./schema/commission'));

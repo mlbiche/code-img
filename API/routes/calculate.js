@@ -1,9 +1,13 @@
+const { Commission } = require('../model');
+
 module.exports = (router) => {
-    router.post('/calculate', (req, res) => {
-        const commission = req.body.value * 0.2;
+    router.post('/calculate', async (req, res) => {
+        const commission = (await Commission.find())[0].commission;
+
+        const result = req.body.value * commission;
 
         res.json({
-            commission: commission
+            result: result
         });
     });
 };
