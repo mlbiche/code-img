@@ -19,6 +19,16 @@ app.post('/login',
   ],
   loginEndpointCallback
 );
+// POST/registeration endpoint
+app.post('/registeration',
+  // Validate request body
+  [
+    body('username').not().isEmpty(),
+    body('email').isEmail(),
+    body('password').not().isEmpty()
+  ],
+  registerationEndpointCallback
+);
 
 // Launch the server
 app.listen(PORT, () => {
