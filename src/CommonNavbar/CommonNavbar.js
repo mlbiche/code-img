@@ -1,24 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import './CommonNavbar.css'
+import { Navbar, Nav } from 'react-bootstrap';
 
 /**
  * CommonNavbar component
  */
 function CommonNavbar() {
   return (
-    <div id="common-navbar-container">
-      <Link to='/' id="brand-name-link">
-        <div id="brand-name-container">
-          <h1>Code-img</h1>
-        </div>
-      </Link>
-      <div id="authentification-container">
-        <button>Sign in</button>
-        <button>Register</button>
-      </div>
-    </div>
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand href="/">Code-img</Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="ml-auto">
+          <Nav.Item>
+            <Nav.Link>Sign in</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link>Register</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }
 
