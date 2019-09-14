@@ -1,20 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './FrontPageNavBar.css';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 function FrontPageNavBar() {
   return (
-    <div id='front-page-navbar-container'>
-      <Link to="/leaderboard">
-        <button className="front-page-navbar-button">Leaderboard</button>
-      </Link>
-      <Link>
-        <button className="front-page-navbar-button">Upload New</button>
-      </Link>
-    </div>
+    <ButtonGroup>
+      <Button href="/leaderboard" variant="dark">Leaderboard</Button>
+      <Button variant="dark">Upload New</Button>
+    </ButtonGroup>
   );
-
-
 }
 
 export default FrontPageNavBar;
