@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Registeration extends Component {
+class RegistrationView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -9,7 +9,7 @@ class Registeration extends Component {
             password: ''
         };
 
-        this.submitRegistration = this.submitRegistration.bind(this);
+        this.submitRegistration  = this.submitRegistration.bind(this);
         this.changeUsername = this.changeUsername.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changeEmail = this.changeEmail.bind(this);
@@ -27,9 +27,10 @@ class Registeration extends Component {
         this.setState({ email: event.target.value });
     }
 
-    submitSaveData(event) {
-        event.preventDefault();
-    }
+    submitRegistration (e) {
+        e.preventDefault();
+      };
+
     render() {
         return (
             <div>
@@ -45,14 +46,12 @@ class Registeration extends Component {
 
                     <label>
                         Email:
-                <input type="text" placeholder="Enter your email" name="email"  onChange={this.changeEmail}/>
+                <input type="email" placeholder="Enter your email" name="email"  onChange={this.changeEmail}/>
                     </label>
                     <input type="submit" value="Register" />
                 </form>
-
-
             </div >
         );
     }
 }
-export default Registeration;
+export default RegistrationView;
