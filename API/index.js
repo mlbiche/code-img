@@ -2,6 +2,8 @@ const express = require('express');
 const db = require('./model/db'); // Load the MongoDB database
 const { body } = require('express-validator');
 const loginEndpointCallback = require('./routes/login');
+const registrationEndpointCallback = require('./routes/registration');
+const deleteEndpointCallback = require('./routes/deleteUser');
 
 const PORT = 3000;
 
@@ -19,6 +21,7 @@ app.post('/login',
   ],
   loginEndpointCallback
 );
+
 // POST/registeration endpoint
 app.post('/registeration',
   // Validate request body
@@ -27,7 +30,12 @@ app.post('/registeration',
     body('email').isEmail(),
     body('password').not().isEmpty()
   ],
-  registerationEndpointCallback
+  registrationEndpointCallback
+);
+
+// DELETE/:userId endpoint
+app.delete('/:userId',
+  deleteEndpointCallback
 );
 
 // Launch the server
