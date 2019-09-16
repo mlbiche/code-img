@@ -2,7 +2,7 @@
 const argon2 = require('argon2');
 
 // import the user model
-const User = require('../models/user');
+const { User } = require('../model/schema/user');
 
 // create the user realted routers
 // the signup route for the user creation

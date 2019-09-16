@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const { User } = require('../model/schema/user');
 
 module.exports = (req, res) => {
     User.remove({ _id: req.params.userId })

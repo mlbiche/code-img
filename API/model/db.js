@@ -5,7 +5,7 @@
 const mongoose = require('mongoose');
 
 // Connect to MongoDB database
-mongoose.connect('mongodb://localhost/test_db', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/test_db', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 const db = mongoose.connection;
 
 // If database connection fails, kill the server.
