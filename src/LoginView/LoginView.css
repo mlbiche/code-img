@@ -29,9 +29,3 @@ form {
   letter-spacing: 1px;
   margin-bottom: 0.25em;
 }
-
-#connection-success-alert,
-#connection-wrong-credentials-alert,
-#connection-server-fail-alert {
-  display: none;
-}

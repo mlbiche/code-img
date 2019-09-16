@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
+
 import './LoginView.css';
+
 class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      showConnectionSuccessAlert: false,
+      showConnectionWrongCredentialsAlert: false,
+      showConnectionServerFailAlert: false,
     };
 
     this.submitLogin = this.submitLogin.bind(this);
@@ -21,9 +26,18 @@ class LoginView extends Component {
     this.setState({ email: event.target.value });
   }
 
-  submitLogin(e) {  
+  submitLogin(e) {
+    // Hide all the slerts
+    this.setState({
+      showConnectionSuccessAlert: false,
+      showConnectionWrongCredentialsAlert: false,
+      showConnectionServerFailAlert: false
+    });
+
+    // Prevent page refreshing
     e.preventDefault();
 
+    // Fetch the form data
     fetch('http://localhost:3000/login', {
       method: 'POST',
       body: JSON.stringify({
@@ -33,26 +47,54 @@ class LoginView extends Component {
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include' // Allow to receive a Cross-Origin cookie
     })
-      .then((res) => {
-        // TODO : Handle the response
+      .then(res => {
+        // Empty the form
+        this.emailInput.value = '';
+        this.passwordInput.value = '';
+        this.setState({ email: '', password: '' });
+
+        switch (res.status) {
+          case 200:
+            // Show the success alert
+            this.setState({ showConnectionSuccessAlert: true });
+            break;
+          case 422:
+          case 401:
+            // Show the wrong credentials alert
+            this.setState({ showConnectionWrongCredentialsAlert: true });
+            break;
+          case 500:
+            // Show the internal error alert
+            this.setState({ showConnectionServerFailAlert: true });
+            break;
+          default:
+            break;
+        }
       });
   };
 
   render() {
     return (
       <div>
-        <p id="connection-success-alert">You are successfully connected !</p>
-        <p id="connection-wrong-credentials-alert">You have entered wrong email or password.</p>
-        <p id="connection-server-fail-alert">Your connection has failed because of an internal error.</p>
+        {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
+        {this.state.showConnectionSuccessAlert &&
+          (<p>You are successfully connected !</p>)
+        }
+        {this.state.showConnectionWrongCredentialsAlert &&
+          (<p>You have entered wrong email or password.</p>)
+        }
+        {this.state.showConnectionServerFailAlert &&
+          (<p>Your connection has failed because of an internal error.</p>)
+        }
         <div className="form-wrapper">
           <form onSubmit={this.submitLogin}>
             <label>
               Email:
-                <input type="email" placeholder="Enter your email" name="email" onChange={this.changeEmail} />
+                <input ref={(ref) => this.emailInput = ref} type="email" placeholder="Enter your email" name="email" onChange={this.changeEmail} />
             </label>
             <label>
               Password:
-                <input type="password" placeholder="Enter your password" name="password" onChange={this.changePassword} />
+                <input ref={(ref) => this.passwordInput = ref} type="password" placeholder="Enter your password" name="password" onChange={this.changePassword} />
             </label>
             <input type="submit" value="Login" className="login" />
           </form>

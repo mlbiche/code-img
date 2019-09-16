@@ -14,7 +14,7 @@ const CredentialsMismatchError = require('../common/errors/credentialsMismatchEr
  * @param req The request. It must contains :
  *   - email : string, the user email
  *   - password : string, the hashed salted password
- * @param res The response
+ * @param res The response. 200 on success, 422 if invalid request, 401 if invalid credentials, 500 if internal error
  */
 module.exports = async (req, res) => {
   /**
