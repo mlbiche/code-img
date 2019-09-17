@@ -29,6 +29,39 @@ class RegistrationView extends Component {
 
   submitRegistration(e) {
     e.preventDefault();
+    const newUser = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    }
+    // Post request to backend
+    fetch('/api/routes/registration', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+      }),
+    }).then(res => res.json())
+      .then(json => {
+        console.log('json', json);
+        if (json.success) {
+          this.setState({
+            message: "successful in registering",
+            email: '',
+            password: ''
+          });
+        } else {
+          this.setState({
+            message: "Error in registering"
+          });
+        }
+      }).catch(error => {
+        console.log('signup error: ');
+        console.log(error)
+      })
   };
 
   render() {

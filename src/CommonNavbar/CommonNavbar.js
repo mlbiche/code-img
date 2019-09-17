@@ -16,7 +16,7 @@ function CommonNavbar() {
       </Link>
       <div id="authentification-container">
         <a href="/login"><button>Log in</button></a>
-        <button>Register</button>
+        <a href="/registration"><button>Register</button></a>
       </div>
     </div>
   );
