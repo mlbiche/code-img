@@ -46,7 +46,7 @@ class RegistrationView extends Component {
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
-        // Empty the fileds after registeration
+        // Empty the fileds after registration
         this.emailInput.value = '';
         this.usernameInput.value = '';
         this.passwordInput.value = '';
