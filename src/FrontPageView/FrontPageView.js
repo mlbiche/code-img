@@ -15,7 +15,7 @@ function FrontPageView() {
         </Col>
       </Row>
       <Row>
-        <Col id="discussion-title-col">
+        <Col className="main-title-col">
           <h2>Discussions</h2>
         </Col>
       </Row>

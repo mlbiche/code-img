@@ -1,10 +1,5 @@
-#learderboard-container {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto 2rem auto;
-}
-
-#learderboard-container > #learderboard-title {
-  text-align: center;
+.leaderboard-row {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
 }
