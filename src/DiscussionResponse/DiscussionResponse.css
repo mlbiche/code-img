@@ -1,25 +1,17 @@
-.discussion-response-container {
-  border-bottom: 1px solid black;
+.discussion-response-col {
+  margin-bottom: 1rem;
 }
 
-.discussion-response-container > .discussion-response-header > h2 {
-  font-size: 12pt;
-  font-weight: normal;
-  margin-bottom: 0;
+.discussion-response-col hr {
+  width: 75%;
 }
 
-.discussion-response-container > .discussion-response-header > .discussion-response-date {
-  font-style: italic;
-  color: grey;
-  font-size: 10pt;
-}
-
-.discussion-response-container > .discussion-response-content {
+.discussion-response-img {
   display: flex;
   justify-content: center;
   padding: 1rem 0;
 }
 
-.discussion-response-container > .discussion-response-content > img {
+.discussion-response-img > img {
   max-height: 300px;
 }
