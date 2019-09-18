@@ -37,14 +37,14 @@ export const MOCKUP_DISCUSSIONS = [
     id: 1,
     responses: [
       {
-        id: 3,
+        id: 0,
         username: 'Cody',
         date: new Date(),
         img: require('../mock-img/plane-4301615_640.png'),
         reactions: []
       },
       {
-        id: 4,
+        id: 1,
         username: 'Blaine',
         date: new Date(),
         img: require('../mock-img/sunset-4405820_640.jpg'),
@@ -56,7 +56,43 @@ export const MOCKUP_DISCUSSIONS = [
     id: 2,
     responses: [
       {
-        id: 5,
+        id: 0,
+        username: 'Ursella',
+        date: new Date(),
+        img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),
+        reactions: []
+      }
+    ]
+  },
+  {
+    id: 3,
+    responses: [
+      {
+        id: 0,
+        username: 'Ursella',
+        date: new Date(),
+        img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),
+        reactions: []
+      }
+    ]
+  },
+  {
+    id: 4,
+    responses: [
+      {
+        id: 0,
+        username: 'Ursella',
+        date: new Date(),
+        img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),
+        reactions: []
+      }
+    ]
+  },
+  {
+    id: 5,
+    responses: [
+      {
+        id: 0,
         username: 'Ursella',
         date: new Date(),
         img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),

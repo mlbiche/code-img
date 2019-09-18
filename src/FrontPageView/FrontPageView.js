@@ -2,7 +2,7 @@ import React from 'react';
 import Discussion from '../Discussion/Discussion';
 import { MOCKUP_DISCUSSIONS } from '../DiscussionView/DiscussionView';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row, CardColumns } from 'react-bootstrap';
 
 import './FrontPageView.css';
 
@@ -20,17 +20,21 @@ function FrontPageView() {
         </Col>
       </Row>
       <Row>
-        {
-          MOCKUP_DISCUSSIONS.map((mockup_discussion) => (
-            <Discussion
-              id={mockup_discussion.id}
-              username={mockup_discussion.responses[0].username}
-              date={mockup_discussion.responses[0].date}
-              image={mockup_discussion.responses[0].img}
-              key={mockup_discussion.id}
-            />
-          ))
-        }
+        <Col>
+          <CardColumns>
+            {
+              MOCKUP_DISCUSSIONS.map((mockup_discussion) => (
+                <Discussion
+                  id={mockup_discussion.id}
+                  username={mockup_discussion.responses[0].username}
+                  date={mockup_discussion.responses[0].date}
+                  image={mockup_discussion.responses[0].img}
+                  key={mockup_discussion.id}
+                />
+              ))
+            }
+          </CardColumns>
+        </Col>
       </Row>
     </Container>
   );
