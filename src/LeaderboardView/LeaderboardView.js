@@ -27,13 +27,13 @@ const MOCKUP_REACTION_SCORES = [
  */
 function LeaderboardView() {
   return (
-    <Container>
+    <Container className="main-container">
       <Row>
-        <Col className="main-title-col">
+        <Col className="main-title-col leader-board-view-main-title-col">
           <h2>Leaderboard</h2>
         </Col>
       </Row>
-      <Row className="leaderboard-row">
+      <Row className="leaderboard-view-row">
         <Col xs={12} lg={8}>
           <h3>Best uploaders</h3>
         </Col>
@@ -49,7 +49,7 @@ function LeaderboardView() {
           ))}
         </Col>
       </Row>
-      <Row className="leaderboard-row">
+      <Row className="leaderboard-view-row">
         <Col xs={12} lg={8}>
           <h3>Most appreciated</h3>
         </Col>

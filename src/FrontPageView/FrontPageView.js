@@ -4,11 +4,9 @@ import { MOCKUP_DISCUSSIONS } from '../DiscussionView/DiscussionView';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
 import { Container, Col, Row, CardColumns } from 'react-bootstrap';
 
-import './FrontPageView.css';
-
 function FrontPageView() {
   return (
-    <Container id="front-page-container">
+    <Container className="main-container">
       <Row>
         <Col>
           <FrontPageNavBar />

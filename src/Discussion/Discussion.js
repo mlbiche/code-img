@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Col, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import './Discussion.css';
 
@@ -9,7 +9,7 @@ function Discussion({ id, username, date, image }) {
     <Link to={'/discussion/' + id} className="discussion-link">
       <Card border="dark" >
         <Card.Header>
-          {username}<br />
+          <h2 className="discussion-username">{username}</h2>
           <small className="text-muted">On {date.toDateString()} at {date.toLocaleTimeString()}</small>
         </Card.Header>
         <Card.Img src={image} alt={image} className="discussion-main-img" />

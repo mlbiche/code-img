@@ -1,4 +1,8 @@
-.leaderboard-row {
+.main-title-col.leader-board-view-main-title-col {
+  margin-top: 0;
+}
+
+.leaderboard-view-row {
   margin-top: 1rem;
   margin-bottom: 1rem;
   justify-content: center;
