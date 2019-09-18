@@ -1,13 +1,16 @@
-.user-score-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 1rem;
-  border: 1px solid #000;
+.user-score-card {
+  margin-bottom: 0.5rem;
 }
 
-.user-score-container > p {
-  margin: 0;
+.user-score-card .user-score-container {
+  padding: 0;
+}
+
+.user-score-card .user-score-container .user-score-username-col {
+  display: flex;
+  align-items: center;
+}
+
+.user-score-card .user-score-container .user-score-score-col {
+  text-align: right;
 }
