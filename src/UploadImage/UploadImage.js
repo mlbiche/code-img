@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 import './UploadImage.css';
 
@@ -7,10 +8,12 @@ import './UploadImage.css';
  */
 function UploadImage() {
   return (
-    <div className="upload-image-container">
-      <p>Add a new image</p>
-      <input type="file" />
-    </div>
+    <Card border="dark" className="upload-img-card">
+      <Card.Body className="upload-img-card-body">
+        <Card.Title>Add a new image</Card.Title>
+        <input type="file" />
+      </Card.Body>
+    </Card>
   );
 }
 
