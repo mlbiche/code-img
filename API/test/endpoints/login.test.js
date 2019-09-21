@@ -36,6 +36,104 @@ describe('POST /login endpoint', function() {
     expect(res).to.have.status(401);
   });
 
+  // Log in with an unmatching email
+  it('When logging in with an unmatching email, the API sends back a 401 HTTP error code.', async function() {
+    // Insert a user in the database
+    const realUser =  {
+      email: 'test@email.com',
+      password: '%bTi2Y!9Vvw&'
+    }
+
+    let hashPassword;
+
+    try {
+      hashPassword = await argon2.hash(realUser.password);
+    } catch (err) {
+      console.log('New user creation has failed (hash failure).');
+      console.log(err);
+
+      throw err;
+    }
+
+    const fullUser = new User({
+      email: realUser.email,
+      password: hashPassword,
+      username: 'test'
+    });
+
+    try {
+      await fullUser.save();
+    } catch (err) {
+      console.log('New user creation has failed (insertion failure).');
+      console.log(err);
+
+      throw err;
+    }
+
+    // Log in with a wrong email
+    const loginUser = {
+      email: 'test@email.co',
+      password: '%bTi2Y!9Vvw&'
+    };
+
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(loginUser));
+
+    // Check that HTTP code 401 has been received
+    expect(res).to.have.status(401);
+  });
+
+  // Log in with an unmatching password
+  it('When logging in with an unmatching password, the API sends back a 401 HTTP error code.', async function() {
+    // Insert a user in the database
+    const realUser =  {
+      email: 'test@email.com',
+      password: '%bTi2Y!9Vvw&'
+    }
+
+    let hashPassword;
+
+    try {
+      hashPassword = await argon2.hash(realUser.password);
+    } catch (err) {
+      console.log('New user creation has failed (hash failure).');
+      console.log(err);
+
+      throw err;
+    }
+
+    const fullUser = new User({
+      email: realUser.email,
+      password: hashPassword,
+      username: 'test'
+    });
+
+    try {
+      await fullUser.save();
+    } catch (err) {
+      console.log('New user creation has failed (insertion failure).');
+      console.log(err);
+
+      throw err;
+    }
+
+    // Log in with a wrong password
+    const loginUser = {
+      email: 'test@email.com',
+      password: '%9mH#8dNpqEP'
+    };
+
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(loginUser));
+
+    // Check that HTTP code 401 has been received
+    expect(res).to.have.status(401);
+  });
+
   // Log in with a missing email
   it('When the email is missing, the API sends back a 422 HTTP error code.', async function() {
     const user = {
@@ -105,6 +203,7 @@ describe('POST /login endpoint', function() {
 
   // Log in to an existing user
   it('When logging in to an existing user, the API sends back a 200 HTTP success code.', async function() {
+    // Insert a user in the database
     const loginUser = {
       email: 'test@email.com',
       password: '%bTi2Y!9Vvw&'
@@ -136,6 +235,7 @@ describe('POST /login endpoint', function() {
       throw err;
     }
 
+    // Log in with this user
     const res = await chai.request(app)
       .post('/login')
       .type('application/json')
