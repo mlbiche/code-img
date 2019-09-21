@@ -1,30 +1,21 @@
-const { User } = require('../../model/schema/user');
-
 const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 const app = require('../../index');
-const argon2 = require('argon2');
+const { insertUser, currentUser } = require('../common/user/insertUser');
+const userTestBase = require('../common/user/userTestBase');
 
 chai.use(chaiHttp);
 
 // Test POST /registration endpoint
-describe('POST /registration endpoint', function() {
-  // Empty the User collection when starting /registration test
-  before(async () => {
-    await User.deleteMany({});
-  });
-
-  // Empty the User collection after each test
-  afterEach(async () => {
-    await User.deleteMany({});
-  });
+describe('POST /registration endpoint', function () {
+  userTestBase();
 
   // Register with a missing email
-  it('When the email is missing, the API sends back a 422 HTTP error code.', async function() {
+  it('When the email is missing, the API sends back a 422 HTTP error code.', async function () {
     const user = {
-      password: '%bTi2Y!9Vvw&',
-      username: 'test'
+      password: currentUser().password,
+      username: currentUser().username
     };
 
     const res = await chai.request(app)
@@ -44,10 +35,10 @@ describe('POST /registration endpoint', function() {
   });
 
   // Register with a missing password
-  it('When the password is missing, the API sends back a 422 HTTP error code.', async function() {
+  it('When the password is missing, the API sends back a 422 HTTP error code.', async function () {
     const user = {
-      email: 'test@email.com',
-      username: 'test'
+      email: currentUser().email,
+      username: currentUser().username
     };
 
     const res = await chai.request(app)
@@ -67,10 +58,10 @@ describe('POST /registration endpoint', function() {
   });
 
   // Register with a missing username
-  it('When the username is missing, the API sends back a 422 HTTP error code.', async function() {
+  it('When the username is missing, the API sends back a 422 HTTP error code.', async function () {
     const user = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&'
+      email: currentUser().email,
+      password: currentUser().password
     };
 
     const res = await chai.request(app)
@@ -90,11 +81,11 @@ describe('POST /registration endpoint', function() {
   });
 
   // Register with a misformatted email
-  it('When the email is misformatted, the API sends back a 422 HTTP error code.', async function() {
+  it('When the email is misformatted, the API sends back a 422 HTTP error code.', async function () {
     const user = {
       email: 'test@emailcom',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test'
+      password: currentUser().password,
+      username: currentUser().username
     };
 
     const res = await chai.request(app)
@@ -114,120 +105,54 @@ describe('POST /registration endpoint', function() {
   });
 
   // Register with an already used email
-  it('When registering with an already used email, the API sends back a 409 HTTP error code.', async function() {
+  it('When registering with an already used email, the API sends back a 409 HTTP error code.', async function () {
     // Insert a user in the database
-    const user1 = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test1'
-    };
+    const insertedUser = await insertUser(false);
 
-    let hashPassword1;
-
-    try {
-      hashPassword1 = await argon2.hash(user1.password);
-    } catch (err) {
-      console.log('New user creation has failed (hash failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const fullUser1 = new User({
-      email: user1.email,
-      password: hashPassword1,
-      username: user1.username
-    });
-
-    try {
-      await fullUser1.save();
-    } catch (err) {
-      console.log('New user creation has failed (insertion failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const user2 = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test2'
+    const newUser = {
+      email: insertedUser.email,
+      password: currentUser().password,
+      username: currentUser().username
     };
 
     // Register this user
     const res = await chai.request(app)
       .post('/registration')
       .type('application/json')
-      .send(JSON.stringify(user2));
+      .send(JSON.stringify(newUser));
 
     // Check that HTTP code 409 has been received
     expect(res).to.have.status(409);
   });
 
   // Register with an already used username
-  it('When registering with an already used username, the API sends back a 409 HTTP error code.', async function() {
+  it('When registering with an already used username, the API sends back a 409 HTTP error code.', async function () {
     // Insert a user in the database
-    const user1 = {
-      email: 'test1@email.com',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test'
-    };
+    const insertedUser = await insertUser();
 
-    let hashPassword1;
-
-    try {
-      hashPassword1 = await argon2.hash(user1.password);
-    } catch (err) {
-      console.log('New user creation has failed (hash failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const fullUser1 = new User({
-      email: user1.email,
-      password: hashPassword1,
-      username: user1.username
-    });
-
-    try {
-      await fullUser1.save();
-    } catch (err) {
-      console.log('New user creation has failed (insertion failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const user2 = {
-      email: 'test2@email.com',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test'
+    const newUser = {
+      email: currentUser().email,
+      password: currentUser().password,
+      username: insertedUser.username
     };
 
     // Register this user
     const res = await chai.request(app)
       .post('/registration')
       .type('application/json')
-      .send(JSON.stringify(user2));
+      .send(JSON.stringify(newUser));
 
     // Check that HTTP code 409 has been received
     expect(res).to.have.status(409);
   });
 
   // Register a correct user
-  it('When registering a correct user, the API sends back a 201 HTTP success code.', async function() {
-    const user = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&',
-      username: 'test'
-    };
-
+  it('When registering a correct user, the API sends back a 201 HTTP success code.', async function () {
     // Register this user
     const res = await chai.request(app)
       .post('/registration')
       .type('application/json')
-      .send(JSON.stringify(user));
+      .send(JSON.stringify(currentUser()));
 
     // Check that HTTP code 201 has been received
     expect(res).to.have.status(201);

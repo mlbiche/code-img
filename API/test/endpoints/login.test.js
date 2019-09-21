@@ -1,30 +1,21 @@
-const { User } = require('../../model/schema/user');
-
 const chai = require('chai');
 const expect = chai.expect;
 const chaiHttp = require('chai-http');
 const app = require('../../index');
-const argon2 = require('argon2');
+const { insertUser, currentUser } = require('../common/user/insertUser');
+const userTestBase = require('../common/user/userTestBase');
 
 chai.use(chaiHttp);
 
 // Test POST /login endpoint
-describe('POST /login endpoint', function() {
-  // Empty the User collection when starting /login test
-  before(async () => {
-    await User.deleteMany({});
-  });
-
-  // Empty the User collection after each test
-  afterEach(async () => {
-    await User.deleteMany({});
-  });
+describe('POST /login endpoint', function () {
+  userTestBase();
 
   // Log in to an unexisting user
-  it('When logging in to an unexisting user, then the API sends back a 401 HTTP error code.', async function() {
+  it('When logging in to an unexisting user, then the API sends back a 401 HTTP error code.', async function () {
     const unexistingUser = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&'
+      email: currentUser().email,
+      password: currentUser().password
     };
 
     const res = await chai.request(app)
@@ -37,43 +28,14 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in with an unmatching email
-  it('When logging in with an unmatching email, the API sends back a 401 HTTP error code.', async function() {
+  it('When logging in with an unmatching email, the API sends back a 401 HTTP error code.', async function () {
     // Insert a user in the database
-    const realUser =  {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&'
-    }
-
-    let hashPassword;
-
-    try {
-      hashPassword = await argon2.hash(realUser.password);
-    } catch (err) {
-      console.log('New user creation has failed (hash failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const fullUser = new User({
-      email: realUser.email,
-      password: hashPassword,
-      username: 'test'
-    });
-
-    try {
-      await fullUser.save();
-    } catch (err) {
-      console.log('New user creation has failed (insertion failure).');
-      console.log(err);
-
-      throw err;
-    }
+    const insertedUser = await insertUser(false);
 
     // Log in with a wrong email
     const loginUser = {
-      email: 'test@email.co',
-      password: '%bTi2Y!9Vvw&'
+      email: currentUser().email,
+      password: insertedUser.password
     };
 
     const res = await chai.request(app)
@@ -86,43 +48,14 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in with an unmatching password
-  it('When logging in with an unmatching password, the API sends back a 401 HTTP error code.', async function() {
+  it('When logging in with an unmatching password, the API sends back a 401 HTTP error code.', async function () {
     // Insert a user in the database
-    const realUser =  {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&'
-    }
-
-    let hashPassword;
-
-    try {
-      hashPassword = await argon2.hash(realUser.password);
-    } catch (err) {
-      console.log('New user creation has failed (hash failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const fullUser = new User({
-      email: realUser.email,
-      password: hashPassword,
-      username: 'test'
-    });
-
-    try {
-      await fullUser.save();
-    } catch (err) {
-      console.log('New user creation has failed (insertion failure).');
-      console.log(err);
-
-      throw err;
-    }
+    const insertedUser = await insertUser(false);
 
     // Log in with a wrong password
     const loginUser = {
-      email: 'test@email.com',
-      password: '%9mH#8dNpqEP'
+      email: insertedUser.email,
+      password: currentUser().password
     };
 
     const res = await chai.request(app)
@@ -135,9 +68,9 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in with a missing email
-  it('When the email is missing, the API sends back a 422 HTTP error code.', async function() {
+  it('When the email is missing, the API sends back a 422 HTTP error code.', async function () {
     const user = {
-      password: '%bTi2Y!9Vvw&'
+      password: currentUser().password
     };
 
     const res = await chai.request(app)
@@ -157,9 +90,9 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in with a missing password
-  it('When the password is missing, the API sends back a 422 HTTP error code.', async function() {
+  it('When the password is missing, the API sends back a 422 HTTP error code.', async function () {
     const user = {
-      email: 'test@email.com'
+      email: currentUser().email
     };
 
     const res = await chai.request(app)
@@ -179,10 +112,10 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in with a misformatted email
-  it('When the email is misformatted, the API sends back a 422 HTTP error code.', async function() {
+  it('When the email is misformatted, the API sends back a 422 HTTP error code.', async function () {
     const user = {
       email: 'test@emailcom',
-      password: '%bTi2Y!9Vvw&'
+      password: currentUser().password
     };
 
     const res = await chai.request(app)
@@ -202,44 +135,18 @@ describe('POST /login endpoint', function() {
   });
 
   // Log in to an existing user
-  it('When logging in to an existing user, the API sends back a 200 HTTP success code.', async function() {
+  it('When logging in to an existing user, the API sends back a 200 HTTP success code.', async function () {
     // Insert a user in the database
-    const loginUser = {
-      email: 'test@email.com',
-      password: '%bTi2Y!9Vvw&'
-    };
-
-    let hashPassword;
-
-    try {
-      hashPassword = await argon2.hash(loginUser.password);
-    } catch (err) {
-      console.log('New user creation has failed (hash failure).');
-      console.log(err);
-
-      throw err;
-    }
-
-    const fullUser = new User({
-      email: loginUser.email,
-      password: hashPassword,
-      username: 'test'
-    });
-
-    try {
-      await fullUser.save();
-    } catch (err) {
-      console.log('New user creation has failed (insertion failure).');
-      console.log(err);
-
-      throw err;
-    }
+    const insertedUser = await insertUser(false);
 
     // Log in with this user
     const res = await chai.request(app)
       .post('/login')
       .type('application/json')
-      .send(JSON.stringify(loginUser));
+      .send(JSON.stringify({
+        email: insertedUser.email,
+        password: insertedUser.password
+      }));
 
     // Check that HTTP code 200 has been received
     expect(res).to.have.status(200);
