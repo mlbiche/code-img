@@ -24,7 +24,7 @@ describe('/login', function() {
   it('Log in to an unexisting user should receive 401', async function() {
     const unexistingUser = {
       email: 'test@email.com',
-      password: 'passwordTest'
+      password: '%bTi2Y!9Vvw&'
     };
 
     try {
@@ -45,7 +45,7 @@ describe('/login', function() {
   // Log in with a missing email
   it('Log in with a missing email should receive 422', async function() {
     const user = {
-      password: 'passwordTest'
+      password: '%bTi2Y!9Vvw&'
     };
 
     try {
@@ -92,7 +92,7 @@ describe('/login', function() {
   it('Log in with a misformatted email should receive 422', async function() {
     const user = {
       email: 'test@emailcom',
-      password: 'passwordTest'
+      password: '%bTi2Y!9Vvw&'
     };
 
     try {
@@ -116,7 +116,7 @@ describe('/login', function() {
   it('Log in with an existing user should receive 200', async function() {
     const loginUser = {
       email: 'test@email.com',
-      password: 'passwordTest'
+      password: '%bTi2Y!9Vvw&'
     };
 
     let hashPassword;
