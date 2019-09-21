@@ -7,7 +7,7 @@ before(async () => {
 
     console.log('Connected to MongoDB database!');
   } catch (err) {
-    console.log('MongoDB database connection has failed: killing the test.');
+    console.log('MongoDB database connection has failed. Please check that the database is started. Killing the test.');
     console.log(err);
     process.exit();
   }
@@ -24,3 +24,6 @@ after(async () => {
     console.log(err);
   }
 });
+
+// Test API endpoints
+require('./endpoints');
