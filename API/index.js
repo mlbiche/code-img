@@ -62,3 +62,10 @@ app.delete('/:userId',
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
+
+/**
+ * For testing using chai-http
+ * 
+ * Developped using https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
+ */
+module.exports = app;
