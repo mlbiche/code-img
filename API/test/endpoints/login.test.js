@@ -8,8 +8,8 @@ const argon2 = require('argon2');
 
 chai.use(chaiHttp);
 
-// Test /login endpoint
-describe('/login', function() {
+// Test POST /login endpoint
+describe('POST /login endpoint', function() {
   // Empty the User collection when starting /login test
   before(async () => {
     await User.deleteMany({});
@@ -21,7 +21,7 @@ describe('/login', function() {
   });
 
   // Log in to an unexisting user
-  it('Log in to an unexisting user should receive 401', async function() {
+  it('When logging in to an unexisting user, then the API sends back a 401 HTTP error code.', async function() {
     const unexistingUser = {
       email: 'test@email.com',
       password: '%bTi2Y!9Vvw&'
@@ -43,7 +43,7 @@ describe('/login', function() {
   });
 
   // Log in with a missing email
-  it('Log in with a missing email should receive 422', async function() {
+  it('When the email is missing, the API sends back a 422 HTTP error code.', async function() {
     const user = {
       password: '%bTi2Y!9Vvw&'
     };
@@ -66,7 +66,7 @@ describe('/login', function() {
   });
 
   // Log in with a missing password
-  it('Log in with a missing password should receive 422', async function() {
+  it('When the password is missing, the API sends back a 422 HTTP error code.', async function() {
     const user = {
       email: 'test@email.com'
     };
@@ -89,7 +89,7 @@ describe('/login', function() {
   });
 
   // Log in with a misformatted email
-  it('Log in with a misformatted email should receive 422', async function() {
+  it('When the email is misformatted, the API sends back a 422 HTTP error code.', async function() {
     const user = {
       email: 'test@emailcom',
       password: '%bTi2Y!9Vvw&'
@@ -113,7 +113,7 @@ describe('/login', function() {
   });
 
   // Log in to an existing user
-  it('Log in with an existing user should receive 200', async function() {
+  it('When logging in to an existing user, the API sends back a 200 HTTP success code.', async function() {
     const loginUser = {
       email: 'test@email.com',
       password: '%bTi2Y!9Vvw&'
