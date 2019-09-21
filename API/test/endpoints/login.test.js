@@ -27,19 +27,13 @@ describe('POST /login endpoint', function() {
       password: '%bTi2Y!9Vvw&'
     };
 
-    try {
-      const res = await chai.request(app)
-        .post('/login')
-        .type('application/json')
-        .send(JSON.stringify(unexistingUser));
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(unexistingUser));
 
-      // Check that HTTP code 401 has been received
-      expect(res).to.have.status(401);
-    } catch (err) {
-      console.log('Request to /login has failed.');
-      console.log(err);
-      throw new Error('Request has failed');
-    }
+    // Check that HTTP code 401 has been received
+    expect(res).to.have.status(401);
   });
 
   // Log in with a missing email
@@ -48,21 +42,20 @@ describe('POST /login endpoint', function() {
       password: '%bTi2Y!9Vvw&'
     };
 
-    try {
-      const res = await chai.request(app)
-        .post('/login')
-        .type('application/json')
-        .send(JSON.stringify(user));
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(user));
 
-      // Check that HTTP code 422 has been received
-      expect(res).to.have.status(422);
-      // Check that the invalid parameter is the email
-      expect(res.body).to.have.nested.property('errors[0].param', 'email');
-    } catch (err) {
-      console.log('Request to /login has failed.');
-      console.log(err);
-      throw new Error('Request has failed');
-    }
+    // Check that HTTP code 422 has been received
+    expect(res).to.have.status(422);
+    // Check that the invalid parameter is the email
+    expect(res.body).to.be.a('object');
+    expect(res.body).to.have.property('errors');
+    expect(res.body.errors).to.be.a('array');
+    expect(res.body.errors).to.have.length(1);
+    expect(res.body.errors[0]).to.be.a('object');
+    expect(res.body.errors[0]).to.have.property('param', 'email');
   });
 
   // Log in with a missing password
@@ -71,21 +64,20 @@ describe('POST /login endpoint', function() {
       email: 'test@email.com'
     };
 
-    try {
-      const res = await chai.request(app)
-        .post('/login')
-        .type('application/json')
-        .send(JSON.stringify(user));
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(user));
 
-      // Check that HTTP code 422 has been received
-      expect(res).to.have.status(422);
-      // Check that the invalid parameter is the password
-      expect(res.body).to.have.nested.property('errors[0].param', 'password');
-    } catch (err) {
-      console.log('Request to /login has failed.');
-      console.log(err);
-      throw new Error('Request has failed');
-    }
+    // Check that HTTP code 422 has been received
+    expect(res).to.have.status(422);
+    // Check that the invalid parameter is the password
+    expect(res.body).to.be.a('object');
+    expect(res.body).to.have.property('errors');
+    expect(res.body.errors).to.be.a('array');
+    expect(res.body.errors).to.have.length(1);
+    expect(res.body.errors[0]).to.be.a('object');
+    expect(res.body.errors[0]).to.have.property('param', 'password');
   });
 
   // Log in with a misformatted email
@@ -95,21 +87,20 @@ describe('POST /login endpoint', function() {
       password: '%bTi2Y!9Vvw&'
     };
 
-    try {
-      const res = await chai.request(app)
-        .post('/login')
-        .type('application/json')
-        .send(JSON.stringify(user));
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(user));
 
-      // Check that HTTP code 422 has been received
-      expect(res).to.have.status(422);
-      // Check that the invalid parameter is the email
-      expect(res.body).to.have.nested.property('errors[0].param', 'email');
-    } catch (err) {
-      console.log('Request to /login has failed.');
-      console.log(err);
-      throw new Error('Request has failed');
-    }
+    // Check that HTTP code 422 has been received
+    expect(res).to.have.status(422);
+    // Check that the invalid parameter is the email
+    expect(res.body).to.be.a('object');
+    expect(res.body).to.have.property('errors');
+    expect(res.body.errors).to.be.a('array');
+    expect(res.body.errors).to.have.length(1);
+    expect(res.body.errors[0]).to.be.a('object');
+    expect(res.body.errors[0]).to.have.property('param', 'email');
   });
 
   // Log in to an existing user
@@ -145,18 +136,12 @@ describe('POST /login endpoint', function() {
       throw err;
     }
 
-    try {
-      const res = await chai.request(app)
-        .post('/login')
-        .type('application/json')
-        .send(JSON.stringify(loginUser));
+    const res = await chai.request(app)
+      .post('/login')
+      .type('application/json')
+      .send(JSON.stringify(loginUser));
 
-      // Check that HTTP code 200 has been received
-      expect(res).to.have.status(200);
-    } catch (err) {
-      console.log('Request to /login has failed.');
-      console.log(err);
-      throw new Error('Request has failed');
-    }
+    // Check that HTTP code 200 has been received
+    expect(res).to.have.status(200);
   });
 });
