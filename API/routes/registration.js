@@ -30,7 +30,7 @@ module.exports = (req, res) => {
       // issue if the user exists before
       if (user.length >= 1) { //check the array lentgh of the email address if we already have it in the database
         //409 means conflicts user already exist in the database;
-        return res.status(409);
+        return res.status(409).end();
       } else {
         // create a new user with a hash password
         argon2.hash(req.body.password)
@@ -44,7 +44,7 @@ module.exports = (req, res) => {
             user.save()
               .then(result => {
                 console.log(result);// log the created user
-                res.status(201);
+                res.status(201).end();
               })
               .catch(err => {
                 console.log(err);
