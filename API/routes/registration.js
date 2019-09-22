@@ -24,7 +24,10 @@ module.exports = (req, res) => {
   }
 
   //seacrh for the user before add it to prevent the duplicate email in the database
-  User.find({ email: req.body.email })
+  User.find().or([
+    { email: req.body.email },
+    { username: req.body.username }
+  ])
     .exec()
     .then(user => {
       // issue if the user exists before
