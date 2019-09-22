@@ -1,5 +1,6 @@
 //import the library for encrypt the password
 const argon2 = require('argon2');
+const { validationResult } = require('express-validator');
 
 // import the user model
 const { User } = require('../model/schema/user');
@@ -7,6 +8,21 @@ const { User } = require('../model/schema/user');
 // create the user realted routers
 // the signup route for the user creation
 module.exports = (req, res) => {
+  /**
+   * Check if validation has failed
+   * 
+   * Developped using https://express-validator.github.io/docs/index.html#basic-guide
+   */
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    // Display the error in the API console
+    console.log('POST /registration validation failed : sending 422 HTTP code...');
+
+    // Send back a 422 HTTP Error code (Unprocessable entity)
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   //seacrh for the user before add it to prevent the duplicate email in the database
   User.find({ email: req.body.email })
     .exec()
