@@ -42,8 +42,8 @@ app.post('/login',
   loginEndpointCallback
 );
 
-// POST/registeration endpoint
-app.post('/registeration',
+// POST/registration endpoint
+app.post('/registration',
   // Validate request body
   [
     body('username').not().isEmpty(),

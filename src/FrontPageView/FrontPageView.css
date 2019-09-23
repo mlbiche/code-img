@@ -15,5 +15,5 @@
 #front-page-container > #front-page-discussions-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
