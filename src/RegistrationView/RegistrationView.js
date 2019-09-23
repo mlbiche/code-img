@@ -44,7 +44,6 @@ class RegistrationView extends Component {
       body: JSON.stringify(
         newUser
       ),
-      headers: { 'Content-Type': 'application/json' }
     })
       .then(res => {
         // Empty the fileds after registration
