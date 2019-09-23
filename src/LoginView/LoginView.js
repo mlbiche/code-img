@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './LoginView.css';
+// import './LoginView.css';
 
 class LoginView extends Component {
   constructor(props) {
@@ -76,29 +76,43 @@ class LoginView extends Component {
   render() {
     return (
       <div>
-        {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
-        {this.state.showConnectionSuccessAlert &&
-          (<p>You are successfully connected !</p>)
-        }
-        {this.state.showConnectionWrongCredentialsAlert &&
-          (<p>You have entered wrong email or password.</p>)
-        }
-        {this.state.showConnectionServerFailAlert &&
-          (<p>Your connection has failed because of an internal error.</p>)
-        }
-        <div className="form-wrapper">
-          <form onSubmit={this.submitLogin}>
-            <label>
-              Email:
-                <input ref={(ref) => this.emailInput = ref} type="email" placeholder="Enter your email" name="email" onChange={this.changeEmail} />
-            </label>
-            <label>
-              Password:
-                <input ref={(ref) => this.passwordInput = ref} type="password" placeholder="Enter your password" name="password" onChange={this.changePassword} />
-            </label>
-            <input type="submit" value="Login" className="login" />
-          </form>
+        <div>
+          {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
+          {this.state.showConnectionSuccessAlert &&
+            (<label for="formControlRange">You are successfully connected ! </label>)
+          }
+          {this.state.showConnectionWrongCredentialsAlert &&
+            (<label for="formControlRange">You have entered wrong email or password.</label>)
+          }
+          {this.state.showConnectionServerFailAlert &&
+            (<label for="formControlRange">Your connection has failed because of an internal error.</label>)
+          }
+
+          {/* <div className="form-wrapper"> */}
         </div>
+        <form onSubmit={this.submitLogin}>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            {/* <label>
+              Email: */}
+            <input ref={(ref) => this.emailInput = ref} type="email" type="email"
+              placeholder="Enter your email" name="email"
+              onChange={this.changeEmail} class="form-control" id="exampleInputEmail1" />
+            {/* </label> */}
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            {/* <label> */}
+            <label for="exampleInputPassword1">Password</label>
+            <input ref={(ref) => this.passwordInput = ref} type="password"
+              placeholder="Enter your password" name="password"
+              onChange={this.changePassword} class="form-control" id="exampleInputPassword1" />
+          </div>
+          {/* </label> */}
+          <input type="submit" value="Login" class="btn btn-primary" />
+        </form>
+        {/* </div> */}
+        {/* </div > */}
       </div>
     );
   }

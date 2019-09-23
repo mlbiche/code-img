@@ -20,17 +20,17 @@ function CommonNavbar() {
     //     <a href="/registration"><button>Register</button></a>
     //   </div>
     // </div>
-    <Navbar className="bg-dark justify-content-between" bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">Code-img</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-Navbar-nav" />
       <Navbar.Collapse id="responsive-Navbar-nav">
-        <Nav className="mr-auto">
+        <Nav className="ml-auto">
           <Nav.Link href="/login">Sign in</Nav.Link>
           <Nav.Link href="/registration">Register</Nav.Link>
         </Nav>
-        </Navbar.Collapse>
+      </Navbar.Collapse>
     </Navbar>
-      );
-    }
-    
+  );
+}
+
 export default CommonNavbar;
