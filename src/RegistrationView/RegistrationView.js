@@ -6,7 +6,8 @@ class RegistrationView extends Component {
     this.state = {
       username: '',
       email: '',
-      password: ''
+      password: '',
+      message: ''
     };
 
     this.submitRegistration = this.submitRegistration.bind(this);
@@ -84,6 +85,7 @@ class RegistrationView extends Component {
   render() {
     return (
       <div>
+        <p>{this.state.message}</p>
         <form onSubmit={this.submitRegistration}>
           <label>
             Username:
