@@ -73,7 +73,7 @@ module.exports = async (req, res) => {
         break;
     }
   }
-}
+};
 
 /**
  * Check that the provided email matches a user and that the provided
