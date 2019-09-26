@@ -7,16 +7,6 @@ const { ResponseSchema } = require('./response');
  * Developped using https://mongoosejs.com/docs/guide.html#definition
  */
 const discussionSchema = new mongoose.Schema({
-  user: {
-    _id: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true
-    },
-    username: {
-      type: String,
-      required: true
-    }
-  },
   responses: {
     type: [
       ResponseSchema
