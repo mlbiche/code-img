@@ -42,16 +42,16 @@ module.exports = async (req, res) => {
      * Developped using https://docs.mongodb.com/manual/reference/operator/aggregation/arrayElemAt/
      * and https://mongoosejs.com/docs/api/aggregate.html
      */
-    const discussions = await Discussion.aggregate([
-      {
-        // Select the first response in the responses array
-        $project: {
-          firstResponse: { $arrayElemAt: ["$responses", 0] }
-        }
-      }
-    ]).sort({ _id: -1 }) // Sort the discussions from the most recent to the latest
-    .skip(pageSize * (pageNum - 1)) // Skip the discussions of the previous pages
-    .limit(pageSize); // Limit the number of discussions to the page size
+    const discussions = await Discussion.aggregate()
+      .project({
+        firstResponse: { $arrayElemAt: ["$responses", 0] }
+      }) // Select only the first response of the discussion
+      .addFields({
+        'firstResponse.date': { $toDate: '$firstResponse._id' }
+      }) // Add the date field
+      .sort({ 'firstResponse.date': -1 }) // Sort the discussions from the most recent to the latest
+      .skip(pageSize * (pageNum - 1)) // Skip the discussions of the previous pages
+      .limit(pageSize); // Limit the number of discussions to the page size
 
     // Send back the discussion list as JSON
     res.status(200).json(discussions);
