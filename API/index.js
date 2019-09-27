@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./model/db'); // Load the MongoDB database
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 const cors = require('cors');
 const loginEndpointCallback = require('./routes/login');
 const registrationEndpointCallback = require('./routes/registration');
@@ -61,6 +61,11 @@ app.delete('/:userId',
 
 // GET /discussions endpoint
 app.get('/discussions',
+  // Validate request query
+  [
+    query('pageNum').isInt({ min: 1 }),
+    query('pageSize').isInt({ min: 1 })
+  ],
   discussionsEndpointCallback
 );
 

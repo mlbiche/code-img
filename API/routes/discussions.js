@@ -4,6 +4,7 @@
  * List all discussions
  */
 
+const { validationResult } = require('express-validator');
 const { Discussion } = require('../model/schema/discussion');
 
 /**
@@ -13,7 +14,25 @@ const { Discussion } = require('../model/schema/discussion');
  * @param res The response. 200 on success with the discussion list as JSON, 500 if internal error
  */
 module.exports = async (req, res) => {
-  console.log(`GET /discussions`);
+  /**
+   * Check if validation has failed
+   * 
+   * Developped using https://express-validator.github.io/docs/index.html#basic-guide
+   */
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    // Display the error in the API console
+    console.log('GET /discussion validation failed : sending 422 HTTP code...');
+
+    // Send back a 422 HTTP Error code (Unprocessable entity)
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  const pageNum = parseInt(req.query.pageNum);
+  const pageSize = parseInt(req.query.pageSize);
+
+  console.log(`GET /discussions (page: ${pageNum} / size: ${pageSize})`);
 
   try {
     /**
@@ -25,11 +44,14 @@ module.exports = async (req, res) => {
      */
     const discussions = await Discussion.aggregate([
       {
+        // Select the first response in the responses array
         $project: {
           firstResponse: { $arrayElemAt: ["$responses", 0] }
         }
       }
-    ]).sort({ _id: -1 });
+    ]).sort({ _id: -1 }) // Sort the discussions from the most recent to the latest
+    .skip(pageSize * (pageNum - 1)) // Skip the discussions of the previous pages
+    .limit(pageSize); // Limit the number of discussions to the page size
 
     // Send back the discussion list as JSON
     res.status(200).json(discussions);
