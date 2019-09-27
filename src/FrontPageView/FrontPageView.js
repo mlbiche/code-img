@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import Discussion from '../Discussion/Discussion';
-import { MOCKUP_DISCUSSIONS } from '../DiscussionView/DiscussionView';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
 import './FrontPageView.css';
 import { Container, Col, Row, CardColumns } from 'react-bootstrap';
 
 class FrontPageView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { discussions: [] };
+  }
+
   render() {
     return (
       <Container className="main-container" >
@@ -23,13 +28,13 @@ class FrontPageView extends Component {
           <Col>
             <CardColumns>
               {
-                MOCKUP_DISCUSSIONS.map((mockup_discussion) => (
+                this.state.discussions.map((discussion) => (
                   <Discussion
-                    id={mockup_discussion.id}
-                    username={mockup_discussion.responses[0].username}
-                    date={mockup_discussion.responses[0].date}
-                    image={mockup_discussion.responses[0].img}
-                    key={mockup_discussion.id}
+                    id={discussion._id}
+                    username={discussion.firstResponse.user.username}
+                    date={discussion.firstResponse.date}
+                    image={discussion.firstResponse.imageUrl}
+                    key={discussion.id}
                   />
                 ))
               }
