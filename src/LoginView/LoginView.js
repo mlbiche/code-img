@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Form } from 'react-bootstrap';
 // import './LoginView.css';
 
 class LoginView extends Component {
@@ -37,7 +37,7 @@ class LoginView extends Component {
     // Prevent page refreshing
     e.preventDefault();
 
-    // Fetch the form data
+    // Fetch the Form data
     fetch('http://localhost:3000/login', {
       method: 'POST',
       body: JSON.stringify({
@@ -48,7 +48,7 @@ class LoginView extends Component {
       credentials: 'include' // Allow to receive a Cross-Origin cookie
     })
       .then(res => {
-        // Empty the form
+        // Empty the Form
         this.emailInput.value = '';
         this.passwordInput.value = '';
         this.setState({ email: '', password: '' });
@@ -78,39 +78,56 @@ class LoginView extends Component {
       <div>
         <div>
           {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
-          {this.state.showConnectionSuccessAlert &&
-            (<label for="formControlRange">You are successfully connected ! </label>)
+          {
+            this.state.showConnectionSuccessAlert &&
+            (<label for="FormControlRange">You are successfully connected ! </label>)
           }
-          {this.state.showConnectionWrongCredentialsAlert &&
-            (<label for="formControlRange">You have entered wrong email or password.</label>)
+          {
+            this.state.showConnectionWrongCredentialsAlert &&
+            (<label for="FormControlRange">You have entered wrong email or password.</label>)
           }
-          {this.state.showConnectionServerFailAlert &&
-            (<label for="formControlRange">Your connection has failed because of an internal error.</label>)
+          {
+            this.state.showConnectionServerFailAlert &&
+            (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
           }
 
-          {/* <div className="form-wrapper"> */}
-        </div>
-        <form onSubmit={this.submitLogin}>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            {/* <label>
-              Email: */}
-            <input ref={(ref) => this.emailInput = ref} type="email" type="email"
+          {/* <div className="Form-wrapper"> */}
+        </div >
+        <Form onSubmit={this.submitLogin}>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email"
+              ref={(ref) => this.emailInput = ref}
+              onChange={this.changeEmail} class="Form-control" />
+            {/*  <input ref={(ref) => this.emailInput = ref} type="email" 
               placeholder="Enter your email" name="email"
-              onChange={this.changeEmail} class="form-control" id="exampleInputEmail1" />
+              onChange={this.changeEmail} class="Form-control" id="exampleInputEmail1" /> */}
             {/* </label> */}
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
-            {/* <label> */}
-            <label for="exampleInputPassword1">Password</label>
-            <input ref={(ref) => this.passwordInput = ref} type="password"
+            {/* <small id="emailHelp" class="Form-text text-muted">We'll never share your email with anyone else.
+            </small> */}
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+          {/*  </div> */}
+          {/*   <div class="Form-group"> */}
+          {/* <label> */}
+          {/* <label for="exampleInputPassword1">Password</label> */}
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password"
+              ref={(ref) => this.passwordInput = ref}
+              onChange={this.changePassword} class="Form-control" />
+          </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            {/* <input ref={(ref) => this.passwordInput = ref} type="password"
               placeholder="Enter your password" name="password"
-              onChange={this.changePassword} class="form-control" id="exampleInputPassword1" />
-          </div>
-          {/* </label> */}
-          <input type="submit" value="Login" class="btn btn-primary" />
-        </form>
+              onChange={this.changePassword} class="Form-control" id="exampleInputPassword1" />
+            </div> */}
+            {/* </label> */}
+          </Form.Group>
+          <input type="submit" value="Login" className="btn btn-primary" />
+        </Form>
         {/* </div> */}
         {/* </div > */}
       </div>
