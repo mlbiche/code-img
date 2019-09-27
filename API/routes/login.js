@@ -1,6 +1,7 @@
 /**
  * POST /login endpoint callback
  * 
+ * Log in a user
  */
 
 const { validationResult } = require('express-validator');
@@ -11,6 +12,7 @@ const CredentialsMismatchError = require('../common/errors/credentialsMismatchEr
 
 /**
  * POST /login endpoint callback
+ * Log in a user
  * @param req The request. It must contains :
  *   - email : string, the user email
  *   - password : string, the hashed salted password
@@ -73,7 +75,7 @@ module.exports = async (req, res) => {
         break;
     }
   }
-}
+};
 
 /**
  * Check that the provided email matches a user and that the provided

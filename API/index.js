@@ -1,10 +1,11 @@
 const express = require('express');
 const db = require('./model/db'); // Load the MongoDB database
-const { body } = require('express-validator');
+const { body, query } = require('express-validator');
 const cors = require('cors');
 const loginEndpointCallback = require('./routes/login');
 const registrationEndpointCallback = require('./routes/registration');
 const deleteEndpointCallback = require('./routes/deleteUser');
+const discussionsEndpointCallback = require('./routes/discussions');
 
 const PORT = 3000;
 
@@ -21,12 +22,12 @@ app.use(express.json());
  */
 var corsOptions = {
   origin: 'http://localhost:3001',
-  credentials:  true
+  credentials: true
 }
 
 app.use(cors(corsOptions))
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -42,7 +43,7 @@ app.post('/login',
   loginEndpointCallback
 );
 
-// POST/registration endpoint
+// POST /registration endpoint
 app.post('/registration',
   // Validate request body
   [
@@ -53,9 +54,19 @@ app.post('/registration',
   registrationEndpointCallback
 );
 
-// DELETE/:userId endpoint
+// DELETE /:userId endpoint
 app.delete('/:userId',
   deleteEndpointCallback
+);
+
+// GET /discussions endpoint
+app.get('/discussions',
+  // Validate request query
+  [
+    query('pageNum').isInt({ min: 1 }),
+    query('pageSize').isInt({ min: 1 })
+  ],
+  discussionsEndpointCallback
 );
 
 // Launch the server

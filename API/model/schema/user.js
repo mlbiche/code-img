@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   }, // for validation add built in validation with monsgoose
   password: { type: String, required: true },// this filed should be given to create user
   secretKey: String, // The generated secretKey used for signing the session JWT
-  username: { type: String, required: true }
+  username: { type: String, required: true, unique: true }
 });
 
 /**
@@ -22,4 +22,4 @@ const userSchema = new mongoose.Schema({
  * 
  * Developped using https://mongoosejs.com/docs/guide.html#models
  */
-module.exports.User = mongoose.model('User', userSchema);
+module.exports.User = mongoose.model('User', userSchema, 'discussions');
