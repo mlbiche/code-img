@@ -2,29 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 import UploadImage from '../UploadImage/UploadImage';
-
 import './DiscussionView.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
 // Mock up Discussions object constants
 export const MOCKUP_DISCUSSIONS = [
   {
     id: 0,
     responses: [
-      { 
+      {
         id: 0,
         username: 'Krystine',
         date: new Date(),
         img: require('../mock-img/books-3733892_640.jpg'),
         reactions: []
       },
-      { 
+      {
         id: 1,
         username: 'Ern',
         date: new Date(),
         img: require('../mock-img/mountain-4387827_640.jpg'),
         reactions: []
       },
-      { 
+      {
         id: 2,
         username: 'Krystine',
         date: new Date(),
@@ -75,19 +75,23 @@ function DiscussionView({ match }) {
   const mockupDiscussion = MOCKUP_DISCUSSIONS[match.params.id];
 
   return (
-    <div className="discussion-responses-container">
-      {/* Display all the discussion response in different DiscussionResponse components */}
-      {mockupDiscussion.responses.map((response) => (
-        <DiscussionResponse
-          username={response.username}
-          date={response.date}
-          img={response.img}
-          reactions={response.reactions}
-          key={response.id}
-        />
-      ))}
-      <UploadImage />
-    </div>
+    <Container className="main-container">
+      <Row className="discussion-view-row">
+        {/* Display all the discussion response in different DiscussionResponse components */}
+        {mockupDiscussion.responses.map((response) => (
+          <DiscussionResponse
+            username={response.username}
+            date={response.date}
+            img={response.img}
+            reactions={response.reactions}
+            key={response.id}
+          />
+        ))}
+        <Col className="discussion-view-row" lg={8} md ={4} xs={12}>
+          <UploadImage />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

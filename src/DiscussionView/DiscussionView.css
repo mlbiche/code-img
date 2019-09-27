@@ -8,3 +8,17 @@
 .discussion-responses-container > * {
   width: 50%;
 }
+
+.discussion-view-row {
+  justify-content: center;
+}
+
+.discussion-view-row {
+  justify-content: center;
+  display: flex;
+}
+
+.discussion-view-col{
+  justify-content: center;
+  display: flex;
+}
