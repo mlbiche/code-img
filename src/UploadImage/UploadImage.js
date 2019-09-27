@@ -2,15 +2,19 @@ import React from 'react';
 
 import './UploadImage.css';
 
+import { Card } from 'react-bootstrap';
 /**
  * UploadImage component
  */
 function UploadImage() {
   return (
-    <div className="upload-image-container">
-      <p>Add a new image</p>
-      <input type="file" />
-    </div>
+    <Card border="dark" className="upload-image-container">
+      <Card.Img variant="top" />
+      <Card.Body>
+        <Card.Title>ِAdd a new disscussion image</Card.Title>
+        <input type="file" />
+      </Card.Body>
+    </Card>
   );
 }
 
