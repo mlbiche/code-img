@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import './FrontPageNavBar.css';
-import { Button, ButtonGroup, ButtonToolbar} from 'react-bootstrap';
+import { Button, ButtonToolbar} from 'react-bootstrap';
 
 function FrontPageNavBar() {
   return (
@@ -15,12 +15,8 @@ function FrontPageNavBar() {
     //   </Link>
     // </div>
     <ButtonToolbar aria-label="Toolbar with button groups">
-      <ButtonGroup className="mr-2">
-        <Button href="/leaderboard" variant="light" variant="secondary">Leaderboard</Button>
-      </ButtonGroup>
-      <ButtonGroup className="mr-2">
+        <Button href="/leaderboard" variant="secondary">Leaderboard</Button>
       <Button href="#" variant="secondary">Upload New</Button>
-    </ButtonGroup>
     </ButtonToolbar >
   );
 }
