@@ -29,18 +29,18 @@ function FrontPageView() {
     // //   </div>
     // // </div>
     <Container className="main-container">
-    <Row>
-      <Col>
+    <Row className="frontpage-row">
+      <Col className="frontpage-title-col">
         <FrontPageNavBar />
       </Col>
     </Row>
     <Row>
-      <Col className="main-title-col">
+      <Col xs={12} lg={8} md={4} className="frontpage-title-col">
         <h2>Discussions</h2>
       </Col>
     </Row>
     <Row>
-      <Col>
+      <Col xs={12} lg={8} md={4} className="frontpage-title-col">
         <CardColumns>
           {
             MOCKUP_DISCUSSIONS.map((mockup_discussion) => (
