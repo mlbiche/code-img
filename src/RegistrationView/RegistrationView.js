@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 class RegistrationView extends Component {
   constructor(props) {
@@ -86,31 +86,49 @@ class RegistrationView extends Component {
     return (
       <div>
         {/* <p>{this.state.message}</p> */}
-        <label for="formControlRange"> {this.state.message}</label>
-        <form onSubmit={this.submitRegistration}>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Username</label>
+        <label> {this.state.message}</label>
+        <Form onSubmit={this.submitRegistration}>
+          {/* <div class="Form-group"> */}
+          {/* <label>Username</label>
             <input placeholder="Enter your username"
               ref={(ref) => this.usernameInput = ref}
               name="username" onChange={this.changeUsername}
-              type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <div class="form-group">
+              type="email" class="Form-control" aria-describedby="emailHelp" />
+            <small id="emailHelp" class="Form-text text-muted">We'll never share your email with anyone else.</small>
+          </div> */}
+          <Form.Group>
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter your username"
+              ref={(ref) => this.usernameInput = ref}
+              onChange={this.changeUsername} className="Form-control" />
+          </Form.Group>
+          {/* <div class="Form-group">
+            <label>Email address</label>
+            <input type="email" placeholder="Enter your email" ref={(ref) => this.emailInput = ref}
+              name="email" onChange={this.changeEmail}
+              class="Form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email address" />
+            <small id="emailHelp" class="Form-text text-muted">We'll never share your email with anyone else.</small>
+          </div> */}
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter your email"
+              ref={(ref) => this.emailInput = ref}
+              onChange={this.changeEmail} className="Form-control" />
+          </Form.Group>
+          {/* <div class="Form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" placeholder="Enter your password"
               ref={(ref) => this.passwordInput = ref} name="password" onChange={this.changePassword}
-              class="form-control" id="exampleInputPassword1" />
-          </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" placeholder="Enter your email" ref={(ref) => this.emailInput = ref}
-              name="email" onChange={this.changeEmail}
-              class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email address" />
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <input type="submit" class="btn btn-primary" value="Register" />
-        </form>
+              class="Form-control" id="exampleInputPassword1" />
+          </div> */}
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Enter your password"
+              ref={(ref) => this.passwordInput = ref}
+              onChange={this.changePassword} className="Form-control" />
+          </Form.Group>
+          <input type="submit" className="btn btn-primary" value="Register" />
+        </Form>
       </div >
     );
   }
