@@ -16,13 +16,9 @@
   text-align: center;
 }
 
-/* #front-page-container > #front-page-title { */
-  /* text-align: center; */
-/* } */
-  .frontpage-row {
+.frontpage-row {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    justify-content: center;
   }
 
   .frontpage-title-col {
@@ -35,3 +31,4 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
