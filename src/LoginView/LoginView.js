@@ -90,8 +90,6 @@ class LoginView extends Component {
             this.state.showConnectionServerFailAlert &&
             (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
           }
-
-          {/* <div className="Form-wrapper"> */}
         </div >
         <Form onSubmit={this.submitLogin}>
           <Form.Group controlId="formBasicEmail">
@@ -99,20 +97,10 @@ class LoginView extends Component {
             <Form.Control type="email" placeholder="Enter email"
               ref={(ref) => this.emailInput = ref}
               onChange={this.changeEmail} class="Form-control" />
-            {/*  <input ref={(ref) => this.emailInput = ref} type="email" 
-              placeholder="Enter your email" name="email"
-              onChange={this.changeEmail} class="Form-control" id="exampleInputEmail1" /> */}
-            {/* </label> */}
-            {/* <small id="emailHelp" class="Form-text text-muted">We'll never share your email with anyone else.
-            </small> */}
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
-          {/*  </div> */}
-          {/*   <div class="Form-group"> */}
-          {/* <label> */}
-          {/* <label for="exampleInputPassword1">Password</label> */}
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="Password"
@@ -120,16 +108,9 @@ class LoginView extends Component {
               onChange={this.changePassword} class="Form-control" />
           </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
-            {/* <input ref={(ref) => this.passwordInput = ref} type="password"
-              placeholder="Enter your password" name="password"
-              onChange={this.changePassword} class="Form-control" id="exampleInputPassword1" />
-            </div> */}
-            {/* </label> */}
           </Form.Group>
           <input type="submit" value="Login" className="btn btn-primary" />
         </Form>
-        {/* </div> */}
-        {/* </div > */}
       </div>
     );
   }
