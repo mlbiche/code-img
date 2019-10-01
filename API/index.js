@@ -6,6 +6,7 @@ const loginEndpointCallback = require('./routes/login');
 const registrationEndpointCallback = require('./routes/registration');
 const deleteEndpointCallback = require('./routes/deleteUser');
 const discussionsEndpointCallback = require('./routes/discussions');
+const discussionResponsesEndpointCallback = require('./routes/discussionResponses');
 
 const PORT = 3000;
 
@@ -68,6 +69,11 @@ app.get('/discussions',
   ],
   discussionsEndpointCallback
 );
+
+// GEt /discussion/:discussionId endpoint
+app.get('/discussion/:discussionId',
+  discussionResponsesEndpointCallback
+)
 
 // Launch the server
 app.listen(PORT, () => {
