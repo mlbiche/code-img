@@ -4,7 +4,7 @@
   max-width: 100px;
 }
 
-.front-page-navbar-button {
-  width: 100%;
-  margin-bottom: 1rem;
+#front-page-navbar-button {
+  margin-left: 1rem;
 }
+
