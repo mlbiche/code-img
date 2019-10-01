@@ -1,99 +1,66 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 import UploadImage from '../UploadImage/UploadImage';
 import './DiscussionView.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
-// Mock up Discussions object constants
-export const MOCKUP_DISCUSSIONS = [
-  {
-    id: 0,
-    responses: [
-      {
-        id: 0,
-        username: 'Krystine',
-        date: new Date(),
-        img: require('../mock-img/books-3733892_640.jpg'),
-        reactions: []
-      },
-      {
-        id: 1,
-        username: 'Ern',
-        date: new Date(),
-        img: require('../mock-img/mountain-4387827_640.jpg'),
-        reactions: []
-      },
-      {
-        id: 2,
-        username: 'Krystine',
-        date: new Date(),
-        img: require('../mock-img/nature-4353699_640.jpg'),
-        reactions: []
-      }
-    ]
-  },
-  {
-    id: 1,
-    responses: [
-      {
-        id: 3,
-        username: 'Cody',
-        date: new Date(),
-        img: require('../mock-img/plane-4301615_640.png'),
-        reactions: []
-      },
-      {
-        id: 4,
-        username: 'Blaine',
-        date: new Date(),
-        img: require('../mock-img/sunset-4405820_640.jpg'),
-        reactions: []
-      }
-    ]
-  },
-  {
-    id: 2,
-    responses: [
-      {
-        id: 5,
-        username: 'Ursella',
-        date: new Date(),
-        img: require('../mock-img/the-feather-of-a-bird-4395771_640.jpg'),
-        reactions: []
-      }
-    ]
-  }
-];
-
 /**
  * DiscussionView component
  * @param match The React router match object that contains the discussion id
  *              in the params 
  */
-function DiscussionView({ match }) {
-  const mockupDiscussion = MOCKUP_DISCUSSIONS[match.params.id];
+class DiscussionView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { responses: [] };
+  }
 
-  return (
-    <Container>
-      <Row className="discussion-view-row">
-        {/* Display all the discussion response in different DiscussionResponse components */}
-        {mockupDiscussion.responses.map((response) => (
-          <DiscussionResponse
-            username={response.username}
-            date={response.date}
-            img={response.img}
-            reactions={response.reactions}
-            key={response.id}
-          />
-        ))}
-        <Col className="discussion-view-row" lg={8} md ={4} xs={12}>
-          <UploadImage />
-        </Col>
-      </Row>
-    </Container>
-  );
+  componentDidMount() {
+    fetch(
+      `http://localhost:3000/discussion/${this.props.match.params.id}`,
+      {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json' }
+      })
+      .then(res => {
+        switch (res.status) {
+          case 200:
+            return res.json();
+          default:
+            throw new Error('Fetching responses has failed');
+        }
+      })
+      .then(resObj => {
+        this.setState({
+          responses: resObj
+        })
+      });
+  }
+
+  render() {
+    return (
+      <Container>
+        <Row className="discussion-view-row">
+          {/* Display all the discussion response in different DiscussionResponse components */}
+          {this.state.responses.map((response) => (
+            <DiscussionResponse
+              username={response.user.username}
+              date={null}
+              img={response.imageUrl}
+              reactions={null}
+              key={response._id}
+            />
+          ))}
+          <Col className="discussion-view-row" lg={8} md={4} xs={12}>
+            <UploadImage />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 }
+
 
 /**
  * Define the component property types

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Container, Row, Button } from 'react-bootstrap';
+import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 
 class RegistrationView extends Component {
   constructor(props) {

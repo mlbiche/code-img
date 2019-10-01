@@ -3,7 +3,19 @@ const { Discussion } = require('../model/schema/discussion');
 module.exports = (req, res) => {
   const discussionId = req.params.discussionId;
 
-  Discussion.find({ _id: discussionId })
+  Discussion.aggregate()
+  .match({ _id: discussionId })
+  // .addFields({
+  //   'responses': {
+  //     '$map': {
+  //       'input': '$responses',
+  //       'as': 'response',
+  //       'in': {
+  //         'date': { $toDate: '$$response._id' }
+  //       }
+  //     }
+  //   }
+  // })
     .exec()
     .then(discussions => {
       if (discussions.length == 0) {

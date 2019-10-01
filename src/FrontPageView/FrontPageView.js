@@ -1,9 +1,10 @@
 import React from 'react';
 import Discussion from '../Discussion/Discussion';
-import { MOCKUP_DISCUSSIONS } from '../DiscussionView/DiscussionView';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
 import './FrontPageView.css';
 import { Container, Col, Row } from 'react-bootstrap';
+
+const MOCKUP_DISCUSSIONS = [];
 
 function FrontPageView() {
   return (
