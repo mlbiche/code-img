@@ -75,7 +75,7 @@ function DiscussionView({ match }) {
   const mockupDiscussion = MOCKUP_DISCUSSIONS[match.params.id];
 
   return (
-    <Container className="main-container">
+    <Container>
       <Row className="discussion-view-row">
         {/* Display all the discussion response in different DiscussionResponse components */}
         {mockupDiscussion.responses.map((response) => (

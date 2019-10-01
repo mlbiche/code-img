@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Container, Row, Button } from 'react-bootstrap';
 
 class RegistrationView extends Component {
   constructor(props) {
@@ -84,30 +84,38 @@ class RegistrationView extends Component {
 
   render() {
     return (
-      <div>
-        <label> {this.state.message}</label>
-        <Form onSubmit={this.submitRegistration}>
-          <Form.Group>
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter your username"
-              ref={(ref) => this.usernameInput = ref}
-              onChange={this.changeUsername} className="Form-control" />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter your email"
-              ref={(ref) => this.emailInput = ref}
-              onChange={this.changeEmail} className="Form-control" />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter your password"
-              ref={(ref) => this.passwordInput = ref}
-              onChange={this.changePassword} className="Form-control" />
-          </Form.Group>
-          <input type="submit" className="btn btn-primary" value="Register" />
-        </Form>
-      </div >
+      <Container>
+        <Row>
+          <Col>
+            <label> {this.state.message}</label>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form onSubmit={this.submitRegistration}>
+              <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" placeholder="Enter your username"
+                  ref={(ref) => this.usernameInput = ref}
+                  onChange={this.changeUsername} className="Form-control" />
+              </Form.Group>
+              <Form.Group controlId="registration-form-email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter your email"
+                  ref={(ref) => this.emailInput = ref}
+                  onChange={this.changeEmail} />
+              </Form.Group>
+              <Form.Group controlId="registration-form-password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Enter your password"
+                  ref={(ref) => this.passwordInput = ref}
+                  onChange={this.changePassword} />
+              </Form.Group>
+              <Button type="submit" variant="primary" value="Register" />
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

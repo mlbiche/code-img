@@ -8,7 +8,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 function FrontPageView() {
   return (
     <Container>
-      <Row className="frontpage-row">
+      <Row>
         <Col className="frontpage-title-col">
           <FrontPageNavBar />
         </Col>

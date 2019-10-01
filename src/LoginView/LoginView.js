@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form } from 'react-bootstrap';
-// import './LoginView.css';
+import { Form, Container, Col, Row, Button } from 'react-bootstrap';
 
 class LoginView extends Component {
   constructor(props) {
@@ -75,43 +74,47 @@ class LoginView extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
-          {
-            this.state.showConnectionSuccessAlert &&
-            (<label for="FormControlRange">You are successfully connected ! </label>)
-          }
-          {
-            this.state.showConnectionWrongCredentialsAlert &&
-            (<label for="FormControlRange">You have entered wrong email or password.</label>)
-          }
-          {
-            this.state.showConnectionServerFailAlert &&
-            (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
-          }
-        </div >
-        <Form onSubmit={this.submitLogin}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email"
-              ref={(ref) => this.emailInput = ref}
-              onChange={this.changeEmail} class="Form-control" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password"
-              ref={(ref) => this.passwordInput = ref}
-              onChange={this.changePassword} class="Form-control" />
-          </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
-          </Form.Group>
-          <input type="submit" value="Login" className="btn btn-primary" />
-        </Form>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
+            {
+              this.state.showConnectionSuccessAlert &&
+              (<label for="FormControlRange">You are successfully connected ! </label>)
+            }
+            {
+              this.state.showConnectionWrongCredentialsAlert &&
+              (<label for="FormControlRange">You have entered wrong email or password.</label>)
+            }
+            {
+              this.state.showConnectionServerFailAlert &&
+              (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
+            }
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form onSubmit={this.submitLogin}>
+              <Form.Group controlId="login-form-email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email"
+                  ref={(ref) => this.emailInput = ref}
+                  onChange={this.changeEmail} />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
+              <Form.Group controlId="login-form-password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password"
+                  ref={(ref) => this.passwordInput = ref}
+                  onChange={this.changePassword} />
+              </Form.Group>
+              <Button variant="primary" type="submit" value="Login" />
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
