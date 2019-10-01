@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Col } from 'react-bootstrap';
 
 import './Discussion.css';
 
 function Discussion({ id, username, date, image }) {
   return (
+    <Col xs={12} lg={4} md={6}>
     <Link to={'/discussion/' + id} className="discussion-link">
       <div className="discussion-container">
         <div className="discussion-header">
@@ -13,8 +15,9 @@ function Discussion({ id, username, date, image }) {
         </div>
         <img src={image} alt={image} />
       </div>
-    </Link>
-  );
+      </Link>
+      </Col>
+     );
 }
 
 export default Discussion;
