@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('GET /discussion validation failed : sending 422 HTTP code...');
+    console.log('GET /discussions validation failed : sending 422 HTTP code...');
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
     return res.status(422).json({ errors: errors.array() });

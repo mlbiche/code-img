@@ -70,7 +70,7 @@ app.get('/discussions',
   discussionsEndpointCallback
 );
 
-// GEt /discussion/:discussionId endpoint
+// GET /discussion/:discussionId endpoint
 app.get('/discussion/:discussionId',
   discussionResponsesEndpointCallback
 )
