@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./model/db'); // Load the MongoDB database
-const { body, query } = require('express-validator');
+const { body, query, param } = require('express-validator');
 const cors = require('cors');
 const loginEndpointCallback = require('./routes/login');
 const registrationEndpointCallback = require('./routes/registration');
@@ -72,6 +72,10 @@ app.get('/discussions',
 
 // GET /discussion/:discussionId endpoint
 app.get('/discussion/:discussionId',
+  // Validate request param
+  [
+    param('discussionId').isLength({ min: 24, max: 24 })
+  ],
   discussionResponsesEndpointCallback
 )
 

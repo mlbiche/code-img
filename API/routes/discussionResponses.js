@@ -5,6 +5,7 @@
  */
 
 const mongoose = require('mongoose');
+const { validationResult } = require('express-validator');
 const { Discussion } = require('../model/schema/discussion');
 
 /**
@@ -14,6 +15,23 @@ const { Discussion } = require('../model/schema/discussion');
  * @param res The response. 200 on success with the response list as JSON, 404 if the discussion is not found, 500 if internal error
  */
 module.exports = (req, res) => {
+  /**
+   * Check if validation has failed
+   * 
+   * Developped using https://express-validator.github.io/docs/index.html#basic-guide
+   */
+  const errors = validationResult(req);
+
+  console.log(errors);
+
+  if (!errors.isEmpty()) {
+    // Display the error in the API console
+    console.log('GET /discussion/:discussionId validation failed : sending 422 HTTP code...');
+
+    // Send back a 422 HTTP Error code (Unprocessable entity)
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   const discussionId = new mongoose.Types.ObjectId(req.params.discussionId);
 
   console.log(`GET /discussion/${discussionId}`);
