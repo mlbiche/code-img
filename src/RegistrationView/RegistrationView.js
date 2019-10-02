@@ -87,7 +87,10 @@ class RegistrationView extends Component {
       <Container>
         <Row>
           <Col>
-            <label> {this.state.message}</label>
+            {
+              this.state.message &&
+              (<label>{this.state.message}</label>)
+            }
           </Col>
         </Row>
         <Row>
