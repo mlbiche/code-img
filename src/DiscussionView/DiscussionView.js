@@ -32,9 +32,13 @@ class DiscussionView extends Component {
         }
       })
       .then(resObj => {
-        this.setState({
-          responses: resObj
-        })
+        // Convert the text date to a JavaScript Date object in each response object
+        resObj.responses.map(response => {
+          response.date = new Date(response.date);
+          return response;
+        });
+
+        this.setState({ responses: resObj.responses });
       });
   }
 
@@ -46,9 +50,9 @@ class DiscussionView extends Component {
           {this.state.responses.map((response) => (
             <DiscussionResponse
               username={response.user.username}
-              date={null}
+              date={response.date}
               img={response.imageUrl}
-              reactions={null}
+              reactions={[]}
               key={response._id}
             />
           ))}
