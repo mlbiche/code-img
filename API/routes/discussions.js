@@ -53,8 +53,16 @@ module.exports = async (req, res) => {
       .skip(pageSize * (pageNum - 1)) // Skip the discussions of the previous pages
       .limit(pageSize); // Limit the number of discussions to the page size
 
+    // Compute the total number of pages
+    const pageMax = Math.ceil((await Discussion.countDocuments()) / pageSize);
+
     // Send back the discussion list as JSON
-    res.status(200).json(discussions);
+    res.status(200).json({
+      discussions: discussions,
+      pageNum: pageNum,
+      pageSize: pageSize,
+      pageMax: pageMax
+    });
   } catch (err) {
     console.log(`Discussion aggregation failure : internal error...`);
     console.log(err);

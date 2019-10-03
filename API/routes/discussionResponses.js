@@ -22,8 +22,6 @@ module.exports = (req, res) => {
    */
   const errors = validationResult(req);
 
-  console.log(errors);
-
   if (!errors.isEmpty()) {
     // Display the error in the API console
     console.log('GET /discussion/:discussionId validation failed : sending 422 HTTP code...');
