@@ -18,7 +18,7 @@ class DiscussionView extends Component {
 
   componentDidMount() {
     fetch(
-      `http://localhost:3000/discussion/${this.props.match.params.id}`,
+      `http://localhost:8080/discussion/${this.props.match.params.id}`,
       {
         method: 'GET',
         headers: { 'Content-type': 'application/json' }

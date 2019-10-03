@@ -25,7 +25,7 @@ class FrontPageView extends Component {
      * 
      * Developped using https://fetch.spec.whatwg.org/#fetch-api
      */
-    const url = new URL('http://localhost:3000/discussions');
+    const url = new URL('http://localhost:8080/discussions');
     const params = { pageNum: PAGE_INIT_NUM, pageSize: PAGE_SIZE };
 
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
