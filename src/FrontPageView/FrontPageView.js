@@ -3,15 +3,24 @@ import Discussion from '../Discussion/Discussion';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
 import './FrontPageView.css';
 import { Container, Col, Row } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
 
 const PAGE_INIT_NUM = 1;
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 30;
 
 class FrontPageView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { discussions: [] };
+    this.state = {
+      discussions: [],
+      pageNum: PAGE_INIT_NUM,
+      pageSize: PAGE_SIZE,
+      pageMax: 0
+    };
+
+    this.updatePage = this.updatePage.bind(this);
+    this.fetchDiscussions = this.fetchDiscussions.bind(this);
   }
 
   /**
@@ -20,13 +29,20 @@ class FrontPageView extends Component {
    * Developped using https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
    */
   componentDidMount() {
+    this.fetchDiscussions();
+  }
+
+  /**
+   * Fetch the discussions from the page stored in the state
+   */
+  fetchDiscussions() {
     /**
      * Prepare the URL with page parameters
      * 
      * Developped using https://fetch.spec.whatwg.org/#fetch-api
      */
     const url = new URL('http://localhost:8080/discussions');
-    const params = { pageNum: PAGE_INIT_NUM, pageSize: PAGE_SIZE };
+    const params = { pageNum: this.state.pageNum, pageSize: this.state.pageSize };
 
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
@@ -47,25 +63,39 @@ class FrontPageView extends Component {
             throw new Error('Fetching discussions has failed');
         }
       })
-      .then(resJson => {
+      .then(resObj => {
         // Update all dates to JS Date objects
-        resJson.map(discussion => {
+        resObj.discussions.map(discussion => {
           discussion.firstResponse.date = new Date(discussion.firstResponse.date);
           return discussion;
         });
 
-        // Update the state with the received discussions
-        this.setState({ discussions: resJson });
-
+        // Update the state with the received discussions and the pageMax
+        this.setState({
+          discussions: resObj.discussions,
+          pageMax: resObj.pageMax
+        });
       })
       .catch(err => {
         console.log(err.message);
       });
   }
 
+  /**
+   * Update the selected page number and fetch the discussions from this new page
+   * 
+   * @param pageNumObj The object that contains the new selected page number
+   */
+  updatePage(pageNumObj) {
+    this.setState(
+      { pageNum: pageNumObj.selected + 1 },
+      this.fetchDiscussions
+    );
+  }
+
   render() {
     return (
-      <Container>
+      <Container id="front-page-container">
         <Row>
           <Col className="frontpage-title-col">
             <FrontPageNavBar />
@@ -88,6 +118,32 @@ class FrontPageView extends Component {
               />
             ))
           }
+        </Row>
+        <Row>
+          <Col className='front-page-pagination-col'>
+            {/*
+              Developed using https://www.npmjs.com/package/react-paginate and 
+              https://github.com/AdeleD/react-paginate/blob/master/demo/js/demo.js
+            */}
+            <ReactPaginate
+              pageCount={this.state.pageMax}
+              pageRangeDisplayed={2}
+              marginPagesDisplayed={2}
+              previousLabel={'‹'}
+              nextLabel={'›'}
+              containerClassName={'pagination'}
+              pageClassName={'page-item'}
+              previousClassName={'page-item'}
+              nextClassName={'page-item'}
+              breakClassName={'page-item'}
+              pageLinkClassName={'page-link'}
+              previousLinkClassName={'page-link'}
+              breakLinkClassName={'page-link'}
+              nextLinkClassName={'page-link'}
+              activeClassName={'active'}
+              onPageChange={this.updatePage}
+            />
+          </Col>
         </Row>
       </Container>
     );
