@@ -1,14 +1,7 @@
 #front-page-container {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
-
-/* #front-page-container > * {
-  width: 70%;
-} */
 
 #discussion-title-col {
   margin-top: 1.5rem;
@@ -26,6 +19,7 @@
     margin-bottom: 1rem;
     text-align: center;
   }
+
 #front-page-container > #front-page-discussions-container {
   display: flex;
   flex-wrap: wrap;
