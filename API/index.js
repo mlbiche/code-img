@@ -22,7 +22,7 @@ app.use(express.json());
  * Developped using https://enable-cors.org/server_expressjs.html
  */
 var corsOptions = {
-  origin: 'http://localhost:5000',
+  origin: 'http://localhost:3000',
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
   credentials: true
 };
