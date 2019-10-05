@@ -71,10 +71,13 @@ class FrontPageView extends Component {
         });
 
         // Update the state with the received discussions and the pageMax
-        this.setState({
-          discussions: resObj.discussions,
-          pageMax: resObj.pageMax
-        });
+        this.setState(
+          {
+            discussions: resObj.discussions,
+            pageMax: resObj.pageMax
+          },
+          () => { window.scrollTo(0, 0); }
+        );
       })
       .catch(err => {
         console.log(err.message);
