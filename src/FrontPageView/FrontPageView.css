@@ -1,7 +1,15 @@
 #front-page-container {
-  margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
+.front-page-pagination-col {
+  display: flex;
+  justify-content: center;
+}
+
+/* #front-page-container > * {
+  width: 70%;
+} */
 
 #discussion-title-col {
   margin-top: 1.5rem;

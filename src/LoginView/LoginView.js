@@ -37,7 +37,7 @@ class LoginView extends Component {
     e.preventDefault();
 
     // Fetch the Form data
-    fetch('http://localhost:3000/login', {
+    fetch('http://localhost:8080/login', {
       method: 'POST',
       body: JSON.stringify({
         email: this.state.email,

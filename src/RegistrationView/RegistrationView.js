@@ -37,7 +37,7 @@ class RegistrationView extends Component {
       password: this.state.password
     }
     // Post request to backend
-    fetch('http://localhost:3000/registration', {
+    fetch('http://localhost:8080/registration', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -87,7 +87,10 @@ class RegistrationView extends Component {
       <Container>
         <Row>
           <Col>
-            <label> {this.state.message}</label>
+            {
+              this.state.message &&
+              (<label>{this.state.message}</label>)
+            }
           </Col>
         </Row>
         <Row>

@@ -1,6 +1,6 @@
 const express = require('express');
 const db = require('./model/db'); // Load the MongoDB database
-const { body, query } = require('express-validator');
+const { body, query, param } = require('express-validator');
 const cors = require('cors');
 const loginEndpointCallback = require('./routes/login');
 const registrationEndpointCallback = require('./routes/registration');
@@ -8,7 +8,7 @@ const deleteEndpointCallback = require('./routes/deleteUser');
 const discussionsEndpointCallback = require('./routes/discussions');
 const discussionResponsesEndpointCallback = require('./routes/discussionResponses');
 
-const PORT = 3000;
+const PORT = 8080;
 
 const app = express();
 
@@ -22,17 +22,12 @@ app.use(express.json());
  * Developped using https://enable-cors.org/server_expressjs.html
  */
 var corsOptions = {
-  origin: 'http://localhost:3001',
+  origin: 'http://localhost:5000',
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
   credentials: true
-}
+};
 
-app.use(cors(corsOptions))
-
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3001');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors(corsOptions));
 
 // POST /login endpoint
 app.post('/login',
@@ -70,8 +65,12 @@ app.get('/discussions',
   discussionsEndpointCallback
 );
 
-// GEt /discussion/:discussionId endpoint
+// GET /discussion/:discussionId endpoint
 app.get('/discussion/:discussionId',
+  // Validate request param
+  [
+    param('discussionId').isLength({ min: 24, max: 24 })
+  ],
   discussionResponsesEndpointCallback
 )
 

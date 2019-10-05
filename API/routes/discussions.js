@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('GET /discussion validation failed : sending 422 HTTP code...');
+    console.log('GET /discussions validation failed : sending 422 HTTP code...');
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
     return res.status(422).json({ errors: errors.array() });
@@ -53,8 +53,16 @@ module.exports = async (req, res) => {
       .skip(pageSize * (pageNum - 1)) // Skip the discussions of the previous pages
       .limit(pageSize); // Limit the number of discussions to the page size
 
+    // Compute the total number of pages
+    const pageMax = Math.ceil((await Discussion.countDocuments()) / pageSize);
+
     // Send back the discussion list as JSON
-    res.status(200).json(discussions);
+    res.status(200).json({
+      discussions: discussions,
+      pageNum: pageNum,
+      pageSize: pageSize,
+      pageMax: pageMax
+    });
   } catch (err) {
     console.log(`Discussion aggregation failure : internal error...`);
     console.log(err);
