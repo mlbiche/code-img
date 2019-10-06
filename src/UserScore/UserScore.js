@@ -15,16 +15,24 @@ export const REACTION_SCORE = 'reaction-score';
  */
 function UserScore({ type, username, score }) {
   return (
-    <div className="user-score-container">
-      <p>{username}</p>
-      <p>
-        {score} <span>
+    <div className="user-score-container row">
+      <div class="col-6 col-sm-12">.{username}</div>
+      <div class="col-6 col-sm-12"> {score}
+        <span>
           {/* Adapt the score text depending on the user score type */}
           {type === UPLOAD_SCORE && 'uploaded images'}
           {type === REACTION_SCORE && 'like reactions'}
         </span>
-      </p>
-    </div>
+      </div>
+      {/* <p>{username}</p> */}
+      {/* <p>
+        {score} <span>
+          {/* Adapt the score text depending on the user score type */}
+      {/* {type === UPLOAD_SCORE && 'uploaded images'}
+      {type === REACTION_SCORE && 'like reactions'}
+        </span> */}
+      {/* </p > * /} */}
+    </div >
   );
 }
 
