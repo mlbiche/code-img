@@ -8,6 +8,10 @@
   background-color: #ffffff;
 }
 
+.container {
+  margin-top: 2rem;
+}
+
 form {
   width: 100%;
   display: flex;

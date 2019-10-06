@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Container, Col, Row, Button } from 'react-bootstrap';
+import { Form, Container, Col, Row, Button, Alert } from 'react-bootstrap';
 
 class LoginView extends Component {
   constructor(props) {
@@ -80,15 +80,30 @@ class LoginView extends Component {
             {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
             {
               this.state.showConnectionSuccessAlert &&
-              (<label for="FormControlRange">You are successfully connected ! </label>)
+              // (<label for="FormControlRange">You are successfully connected ! </label>)
+              ['primary'].map((variant, idx) => (
+                <Alert key={idx} variant={variant}>
+                  You are successfully {variant} connected!
+                </Alert>
+              ))
             }
             {
               this.state.showConnectionWrongCredentialsAlert &&
-              (<label for="FormControlRange">You have entered wrong email or password.</label>)
+              // (<label for="FormControlRange">You have entered wrong email or password.</label>)
+              ['danger'].map((variant, idx) => (
+                <Alert key={idx} variant={variant}>
+                  You have entered wrong {variant} email or password.
+                </Alert>
+              ))
             }
             {
               this.state.showConnectionServerFailAlert &&
-              (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
+              // (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
+              ['warning'].map((variant, idx) => (
+                <Alert key={idx} variant={variant}>
+                  Your connection has failed because of {variant} an internal error.
+                </Alert>
+              ))
             }
           </Col>
         </Row>
@@ -110,7 +125,7 @@ class LoginView extends Component {
                   ref={(ref) => this.passwordInput = ref}
                   onChange={this.changePassword} />
               </Form.Group>
-              <Button variant="primary" type="submit" value="Login" />
+              <Button variant="primary" type="submit">Login</Button>
             </Form>
           </Col>
         </Row>
