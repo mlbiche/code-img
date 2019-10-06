@@ -12,15 +12,25 @@ import './DiscussionResponse.css';
  */
 function DiscussionResponse({ username, date, img, reactions }) {
   return (
-    <div className="discussion-response-container">
-      <div className="discussion-response-header">
-        <h2>{username}</h2>
-        <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
-      </div>
-      <div className="discussion-response-content">
-        <img src={img} alt={img} />
-      </div>
+    // <div className="discussion-response-container">
+    //   <div className="discussion-response-header">
+    //     <h2>{username}</h2>
+    //     <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
+    //   </div>
+    //   <div className="discussion-response-content">
+    //     <img src={img} alt={img} />
+    //   </div>
+    // </div>
+    <div class="col-13">
+      <h2>{username}</h2>
+      <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
+      <img src={img} alt={img} />
     </div>
+    //   <div className="discussion-response-content">
+    //     <img src={img} alt={img} />
+    //   </div>
+    // </div>
+
   );
 }
 
