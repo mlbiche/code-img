@@ -114,7 +114,7 @@ class RegistrationView extends Component {
                   ref={(ref) => this.passwordInput = ref}
                   onChange={this.changePassword} />
               </Form.Group>
-              <Button type="submit" variant="primary" value="Register" />
+              <Button type="submit" variant="primary">Register</Button>
             </Form>
           </Col>
         </Row>
