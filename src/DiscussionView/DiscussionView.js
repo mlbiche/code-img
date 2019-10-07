@@ -42,7 +42,7 @@ class DiscussionView extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="my-5">
         <Row className="justify-content-center">
           {/* Display all the discussion response in different DiscussionResponse components */}
           {this.state.responses.map((response) => (
