@@ -1,13 +1,5 @@
 .user-score-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
   margin: 0.5rem 0;
   padding: 1rem;
   border: 1px solid #000;
-}
-
-.user-score-container > p {
-  margin: 0;
 }

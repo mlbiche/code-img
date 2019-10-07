@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import './UserScore.css';
 
@@ -15,24 +16,18 @@ export const REACTION_SCORE = 'reaction-score';
  */
 function UserScore({ type, username, score }) {
   return (
-    <div className="user-score-container row">
-      <div class="col-6 col-sm-12">.{username}</div>
-      <div class="col-6 col-sm-12"> {score}
+    <Container className="user-score-container">
+      <Row>
+      <Col xs={12} md={6}>{username}</Col>
+      <Col xs={12} md={6}>{score}
         <span>
           {/* Adapt the score text depending on the user score type */}
-          {type === UPLOAD_SCORE && 'uploaded images'}
-          {type === REACTION_SCORE && 'like reactions'}
+          {type === UPLOAD_SCORE && ' uploaded images'}
+          {type === REACTION_SCORE && ' like reactions'}
         </span>
-      </div>
-      {/* <p>{username}</p> */}
-      {/* <p>
-        {score} <span>
-          {/* Adapt the score text depending on the user score type */}
-      {/* {type === UPLOAD_SCORE && 'uploaded images'}
-      {type === REACTION_SCORE && 'like reactions'}
-        </span> */}
-      {/* </p > * /} */}
-    </div >
+      </Col>
+      </Row>
+    </Container>
   );
 }
 

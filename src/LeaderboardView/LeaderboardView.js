@@ -2,8 +2,6 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import UserScore, { UPLOAD_SCORE, REACTION_SCORE } from '../UserScore/UserScore';
 
-import './LeaderboardView.css';
-
 // Mock up upload User scores object constants
 const MOCKUP_UPLOAD_SCORES = [
   { id: 0, username: 'Krystine', score: 20 },
@@ -27,7 +25,7 @@ const MOCKUP_REACTION_SCORES = [
  */
 function LeaderboardView() {
   return (
-    <Container className="mt-5">
+    <Container className="my-5">
       <Row className="justify-content-center">
         <Col xs={12} lg={8}>
           <h3 className="leaderboard-title">Best uploaders</h3>
@@ -44,7 +42,7 @@ function LeaderboardView() {
       </Row>
       <Row className="justify-content-center mt-3">
         <Col xs={12} lg={8}>
-          <h3 className="leaderboard-title">Most appreciated</h3>
+          <h3>Most appreciated</h3>
           {/* Display all the reaction scores in different UserScore components */}
           {MOCKUP_REACTION_SCORES.map((mockupReactionScore) => (
             <UserScore
