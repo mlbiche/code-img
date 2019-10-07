@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Container, Row, Col, Button } from 'react-bootstrap';
+import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 class RegistrationView extends Component {
   constructor(props) {
@@ -8,7 +8,8 @@ class RegistrationView extends Component {
       username: '',
       email: '',
       password: '',
-      message: ''
+      message: '',
+      messageCode: 0
     };
 
     this.submitRegistration = this.submitRegistration.bind(this);
@@ -58,38 +59,41 @@ class RegistrationView extends Component {
           case 201:
             // Show the success alert
             this.setState({
-              message: "account create successfully"
+              message: "Account created successfully.",
+              messageCode: res.status
             });
             break;
           case 409:
             // Show the wrong credentials alert
             this.setState({
-              message: "account already exists"
+              message: "Account already exists.",
+              messageCode: res.status
             });
             break;
           case 500:
             // Show the internal error alert
             this.setState({
-              message: "fail to create account"
+              message: "Fail to create account.",
+              messageCode: res.status
             });
             break;
           default:
             break;
         }
       }).catch(error => {
-        console.log('signup error: ');
+        console.log('Signup error: ');
         console.log(error)
       });
   };
 
   render() {
     return (
-      <Container>
+      <Container className="my-5">
         <Row>
           <Col>
             {
               this.state.message &&
-              (<label>{this.state.message}</label>)
+              (<Alert variant={this.state.messageCode === 201 ? "success" : "danger"}>{this.state.message}</Alert>)
             }
           </Col>
         </Row>
