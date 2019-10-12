@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Col } from 'react-bootstrap';
 
 import './DiscussionResponse.css';
 
@@ -12,25 +13,16 @@ import './DiscussionResponse.css';
  */
 function DiscussionResponse({ username, date, img, reactions }) {
   return (
-    // <div className="discussion-response-container">
-    //   <div className="discussion-response-header">
-    //     <h2>{username}</h2>
-    //     <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
-    //   </div>
-    //   <div className="discussion-response-content">
-    //     <img src={img} alt={img} />
-    //   </div>
-    // </div>
-    <div class="col-13">
-      <h2>{username}</h2>
-      <span className="discussion-response-date">On {date.toDateString()} at {date.toLocaleTimeString()}</span>
-      <img src={img} alt={img} />
-    </div>
-    //   <div className="discussion-response-content">
-    //     <img src={img} alt={img} />
-    //   </div>
-    // </div>
-
+    <Col lg={7} xs={12} className="discussion-response-col">
+      <div>
+        <h2 className="discussion-username">{username}</h2>
+        <small className="text-muted">On {date.toDateString()} at {date.toLocaleTimeString()}</small>
+      </div>
+      <div className="discussion-response-img">
+        <img src={img} alt={img} />
+      </div>
+      <hr />
+    </Col>
   );
 }
 

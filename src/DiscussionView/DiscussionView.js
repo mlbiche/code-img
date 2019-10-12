@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
-import UploadImage from '../UploadImage/UploadImage';
-import './DiscussionView.css';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 /**
  * DiscussionView component
@@ -44,8 +42,8 @@ class DiscussionView extends Component {
 
   render() {
     return (
-      <Container>
-        <Row className="discussion-view-row">
+      <Container className="my-5">
+        <Row className="justify-content-center">
           {/* Display all the discussion response in different DiscussionResponse components */}
           {this.state.responses.map((response) => (
             <DiscussionResponse
@@ -56,9 +54,6 @@ class DiscussionView extends Component {
               key={response._id}
             />
           ))}
-          <Col className="discussion-view-row" lg={8} md={4} xs={12}>
-            <UploadImage />
-          </Col>
         </Row>
       </Container>
     );

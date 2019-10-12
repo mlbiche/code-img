@@ -74,36 +74,27 @@ class LoginView extends Component {
 
   render() {
     return (
-      <Container>
+      <Container className="my-5">
         <Row>
           <Col>
             {/* Developped using https://stackoverflow.com/a/24534492/7916042 */}
             {
               this.state.showConnectionSuccessAlert &&
-              // (<label for="FormControlRange">You are successfully connected ! </label>)
-              ['primary'].map((variant, idx) => (
-                <Alert key={idx} variant={variant}>
-                  You are successfully {variant} connected!
-                </Alert>
-              ))
+              (<Alert variant="success">
+                You are successfully connected!
+                </Alert>)
             }
             {
               this.state.showConnectionWrongCredentialsAlert &&
-              // (<label for="FormControlRange">You have entered wrong email or password.</label>)
-              ['danger'].map((variant, idx) => (
-                <Alert key={idx} variant={variant}>
-                  You have entered wrong {variant} email or password.
-                </Alert>
-              ))
+              (<Alert variant="danger">
+                You have entered wrong email or password.
+                </Alert>)
             }
             {
               this.state.showConnectionServerFailAlert &&
-              // (<label for="FormControlRange">Your connection has failed because of an internal error.</label>)
-              ['warning'].map((variant, idx) => (
-                <Alert key={idx} variant={variant}>
-                  Your connection has failed because of {variant} an internal error.
-                </Alert>
-              ))
+              (<Alert variant="danger">
+                Your connection has failed because of an internal error.
+                </Alert>)
             }
           </Col>
         </Row>

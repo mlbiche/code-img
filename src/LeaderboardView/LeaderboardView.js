@@ -1,7 +1,6 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 import UserScore, { UPLOAD_SCORE, REACTION_SCORE } from '../UserScore/UserScore';
-
-import './LeaderboardView.css';
 
 // Mock up upload User scores object constants
 const MOCKUP_UPLOAD_SCORES = [
@@ -26,33 +25,10 @@ const MOCKUP_REACTION_SCORES = [
  */
 function LeaderboardView() {
   return (
-    // <div id="learderboard-container">
-    //   <h2 id="learderboard-title">Leaderboard</h2>
-    //   <h3>Best uploaders</h3>
-    // {/* Display all the upload scores in different UserScore components */}
-    //   {MOCKUP_UPLOAD_SCORES.map((mockupUploadScore) => (
-    //     <UserScore
-    //       type={UPLOAD_SCORE}
-    //       username={mockupUploadScore.username}
-    //       score={mockupUploadScore.score}
-    //       key={mockupUploadScore.id}
-    //     />
-    //   ))}
-    //   <h3>Most appreciated</h3>
-    //   {/* Display all the reaction scores in different UserScore components */}
-    //   {MOCKUP_REACTION_SCORES.map((mockupReactionScore) => (
-    //     <UserScore
-    //       type={REACTION_SCORE}
-    //       username={mockupReactionScore.username}
-    //       score={mockupReactionScore.score}
-    //       key={mockupReactionScore.id}
-    //     />
-    //   ))}
-    // </div>
-    <div class="container learderboard-container">
-      <div class="row">
-        <div class="col">
-          <h3>Best uploaders</h3>
+    <Container className="my-5">
+      <Row className="justify-content-center">
+        <Col xs={12} lg={8}>
+          <h3 className="leaderboard-title">Best uploaders</h3>
           {/* Display all the upload scores in different UserScore components */}
           {MOCKUP_UPLOAD_SCORES.map((mockupUploadScore) => (
             <UserScore
@@ -62,10 +38,10 @@ function LeaderboardView() {
               key={mockupUploadScore.id}
             />
           ))}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
+        </Col>
+      </Row>
+      <Row className="justify-content-center mt-3">
+        <Col xs={12} lg={8}>
           <h3>Most appreciated</h3>
           {/* Display all the reaction scores in different UserScore components */}
           {MOCKUP_REACTION_SCORES.map((mockupReactionScore) => (
@@ -76,10 +52,10 @@ function LeaderboardView() {
               key={mockupReactionScore.id}
             />
           ))}
-        </div>
-      </div>
-      </div>
-      );
-    }
-    
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
 export default LeaderboardView;

@@ -22,4 +22,4 @@ const userSchema = new mongoose.Schema({
  * 
  * Developped using https://mongoosejs.com/docs/guide.html#models
  */
-module.exports.User = mongoose.model('User', userSchema, 'discussions');
+module.exports.User = mongoose.model('User', userSchema, 'users');
