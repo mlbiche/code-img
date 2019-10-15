@@ -14,7 +14,7 @@ The entire project shoudl respect the following defined coding conventions :
 
 * Indentation is composed by two spaces, as defined by React.js.
 * Components `.js` and `.css` files are placed in a same folder specific to the component.
-* JavaScript code use single quote for string while HTML code use double quotes.<br />
+* JavaScript code uses single quote for string while JSX code uses double quotes.<br />
 *Ex: `import './Leaderboard.css'` / `<div id="my-id"></div>`*
 * Method names do not start with an underscore.
 * Folder and file names use Pascal Case. <br />
@@ -45,6 +45,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+**WARNING: Before launching the Web Application, be sure you have started the database and the API *(see `npm run start-db` and `npm run start-api` below)*.**
 
 ### `npm test`
 
