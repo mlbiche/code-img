@@ -1,3 +1,9 @@
+/**
+ * UserScore component
+ * 
+ * Define a division containing a user name and its associated score
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -5,8 +11,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import './UserScore.css';
 
 // UserScore type constants
-export const UPLOAD_SCORE = 'upload-score';
-export const REACTION_SCORE = 'reaction-score';
+export const SCORE_TYPE = {
+  UPLOAD_SCORE: 'upload-score',
+  REACTION_SCORE: 'reaction-score'
+};
 
 /**
  * UserScore component
@@ -18,14 +26,14 @@ function UserScore({ type, username, score }) {
   return (
     <Container className="user-score-container">
       <Row>
-      <Col xs={12} md={6}>{username}</Col>
-      <Col xs={12} md={6}>{score}
-        <span>
-          {/* Adapt the score text depending on the user score type */}
-          {type === UPLOAD_SCORE && ' uploaded images'}
-          {type === REACTION_SCORE && ' like reactions'}
-        </span>
-      </Col>
+        <Col xs={12} md={6}>{username}</Col>
+        <Col xs={12} md={6}>{score}
+          <span>
+            {/* Adapt the score text depending on the user score type */}
+            {type === SCORE_TYPE.UPLOAD_SCORE && ' uploaded images'}
+            {type === SCORE_TYPE.REACTION_SCORE && ' like reactions'}
+          </span>
+        </Col>
       </Row>
     </Container>
   );
@@ -37,8 +45,8 @@ function UserScore({ type, username, score }) {
  */
 UserScore.propTypes = {
   type: PropTypes.oneOf([
-    UPLOAD_SCORE,
-    REACTION_SCORE
+    SCORE_TYPE.UPLOAD_SCORE,
+    SCORE_TYPE.REACTION_SCORE
   ]).isRequired,
   username: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired
