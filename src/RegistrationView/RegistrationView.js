@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Form, Container, Row, Col, Button, Alert } from 'react-bootstrap';
+import { registerUser } from '../services/UserService';
 
 /**
  * RegistrationView component
@@ -26,6 +27,7 @@ class RegistrationView extends Component {
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
+    this.reinitialiseForm = this.reinitialiseForm.bind(this);
   }
 
   /**
@@ -61,63 +63,64 @@ class RegistrationView extends Component {
    * @param event The submission event
    */
   submitRegistration(event) {
-    // Prevent the page reloading, not needed in single page web application
+    // Prevent the page refreshing, not needed in single page web application
     event.preventDefault();
 
-    const newUser = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    };
+    /**
+     * Register the new user
+     */
+    registerUser(this.state.username, this.state.email, this.state.password)
+      .then(statusCode => {
+        // Reinitialise the form as the data has been fetched
+        this.reinitialiseForm();
 
-    // Post request to backend
-    fetch('http://localhost:8080/registration', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser),
-    })
-      .then(res => {
-        // Empty the fileds as the data has been submitted
-        this.emailInput.value = '';
-        this.usernameInput.value = '';
-        this.passwordInput.value = '';
-
-        // Reinitialise the state as the data has been submitted
-        this.setState({
-          email: '',
-          password: ''
-        });
-
-        switch (res.status) {
+        switch (statusCode) {
           case 201:
             // Show the success alert
             this.setState({
               message: 'Account created successfully.',
-              messageCode: res.status
+              messageCode: statusCode
             });
             break;
           case 409:
             // Show the wrong credentials alert
             this.setState({
               message: 'Account already exists.',
-              messageCode: res.status
+              messageCode: statusCode
             });
             break;
           case 500:
             // Show the internal error alert
             this.setState({
               message: 'Fail to create account.',
-              messageCode: res.status
+              messageCode: statusCode
             });
             break;
           default:
             break;
         }
-      }).catch(error => {
-        console.log('Signup error: ');
-        console.log(error)
+      })
+      .catch(err => {
+        console.log('Registration fetch error');
+        console.log(err);
       });
   };
+
+  /**
+   * Reinitialise the form inputs and the the state
+   */
+  reinitialiseForm() {
+    // Empty the fileds
+    this.emailInput.value = '';
+    this.usernameInput.value = '';
+    this.passwordInput.value = '';
+
+    // Reinitialise the state
+    this.setState({
+      email: '',
+      password: ''
+    });
+  }
 
   render() {
     return (
