@@ -13,7 +13,7 @@ const CredentialsMismatchError = require('../common/errors/credentialsMismatchEr
 /**
  * POST /login endpoint callback
  * Log in a user
- * @param req The request. It must contains :
+ * @param req The request. The body must contains :
  *   - email : string, the user email
  *   - password : string, the hashed salted password
  * @param res The response. 200 on success, 422 if invalid request, 401 if invalid credentials, 500 if internal error
@@ -29,9 +29,10 @@ module.exports = async (req, res) => {
   if (!errors.isEmpty()) {
     // Display the error in the API console
     console.log('POST /login validation failed : sending 422 HTTP code...');
+    console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).end();
   }
 
   // The request has been validated and can be processed
@@ -54,8 +55,7 @@ module.exports = async (req, res) => {
      * 
      * Developped using https://expressjs.com/en/4x/api.html#res.cookie
      */
-    res.cookie('sessionToken', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true });
-    res.end();
+    res.cookie('sessionToken', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true }).end();
   } catch (err) {
     // Check the caught error
     switch (err.name) {
@@ -128,7 +128,7 @@ async function generateToken(userId) {
      * 
      * Developped using https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
      */
-    return jwt.sign({ userId: userId }, secretKey, { expiresIn: "12h" });
+    return jwt.sign({ userId: userId }, secretKey, { expiresIn: '12h' });
   } catch (err) {
     // Propagate the error
     throw err;
