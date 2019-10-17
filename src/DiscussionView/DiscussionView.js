@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row } from 'react-bootstrap';
 import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
+import { getDiscussionResponses } from '../services/DiscussionService';
 
 /**
  * DiscussionView component
@@ -16,7 +17,7 @@ import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 class DiscussionView extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = { responses: [] };
   }
 
@@ -26,28 +27,13 @@ class DiscussionView extends Component {
    * Developped using https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
    */
   componentDidMount() {
-    fetch(
-      `http://localhost:8080/discussion/${this.props.match.params.id}`,
-      {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' }
+    getDiscussionResponses(this.props.match.params.id)
+      .then(responses => {
+        this.setState({ responses: responses });
       })
-      .then(res => {
-        switch (res.status) {
-          case 200:
-            return res.json();
-          default:
-            throw new Error('Fetching responses has failed');
-        }
-      })
-      .then(resObj => {
-        // Convert the text date to a JavaScript Date object in each response object
-        resObj.responses.map(response => {
-          response.date = new Date(response.date);
-          return response;
-        });
-
-        this.setState({ responses: resObj.responses });
+      .catch(err => {
+        console.log('getDiscussionResponses error');
+        console.log(err.message);
       });
   }
 

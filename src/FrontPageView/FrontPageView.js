@@ -47,22 +47,18 @@ class FrontPageView extends Component {
    */
   fetchDiscussions() {
     getDiscussionsPage(this.state.pageNum, this.state.pageSize)
-      .then(({ statusCode, discussions, pageMax }) => {
-        if (statusCode === 200) {
-          // Update the state with the received discussions and the pageMax
-          this.setState(
-            {
-              discussions: discussions,
-              pageMax: pageMax
-            },
-            () => { window.scrollTo(0, 0); }
-          );
-        } else {
-          throw new Error('Fetching discussions has failed');
-        }
+      .then(({ discussions, pageMax }) => {
+        // Update the state with the received discussions and the pageMax
+        this.setState(
+          {
+            discussions: discussions,
+            pageMax: pageMax
+          },
+          () => { window.scrollTo(0, 0); }
+        );
       })
       .catch(err => {
-        console.log('Discussions fetch error');
+        console.log('getDiscussionsPage error');
         console.log(err.message);
       });
   }
