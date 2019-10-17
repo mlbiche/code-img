@@ -1,7 +1,7 @@
 /**
  * GET /discussions endpoint callback
  * 
- * List all discussions
+ * List a page of discussions
  */
 
 const { validationResult } = require('express-validator');
@@ -9,8 +9,8 @@ const { Discussion } = require('../model/schema/discussion');
 
 /**
  * GET /discussions endpoint callback
- * List all discussions
- * @param req The request
+ * List a page of discussions
+ * @param req The request. It contains the page number and the page size in the query
  * @param res The response. 200 on success with the discussion list as JSON, 500 if internal error
  */
 module.exports = async (req, res) => {
@@ -24,9 +24,10 @@ module.exports = async (req, res) => {
   if (!errors.isEmpty()) {
     // Display the error in the API console
     console.log('GET /discussions validation failed : sending 422 HTTP code...');
+    console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).end();
   }
 
   const pageNum = parseInt(req.query.pageNum);
@@ -44,7 +45,7 @@ module.exports = async (req, res) => {
      */
     const discussions = await Discussion.aggregate()
       .project({
-        firstResponse: { $arrayElemAt: ["$responses", 0] }
+        firstResponse: { $arrayElemAt: ['$responses', 0] }
       }) // Select only the first response of the discussion
       .addFields({
         'firstResponse.date': { $toDate: '$firstResponse._id' }
