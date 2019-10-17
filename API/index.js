@@ -15,6 +15,8 @@ const discussionsEndpointCallback = require('./routes/discussions');
 const discussionResponsesEndpointCallback = require('./routes/discussionResponses');
 
 const PORT = 8080;
+
+// The Web Application URL
 const FRONT_END_URL = 'http://localhost:3000';
 
 const app = express();
