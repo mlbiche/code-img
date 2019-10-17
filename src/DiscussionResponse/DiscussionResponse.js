@@ -33,7 +33,6 @@ function DiscussionResponse({ username, date, img }) {
 
 /**
  * Define the component property types
- * The type property only accept UPLOAD_SCORE and REACTION_SCORE values
  */
 DiscussionResponse.propTypes = {
   username: PropTypes.string.isRequired,
