@@ -22,9 +22,7 @@ module.exports = (req, res) => {
     .catch(err => {
       console.log(err);
 
-      // Return HTTP erro code 500
-      res.status(500).json({
-        error: err
-      });
+      // Return HTTP error code 500
+      res.status(500).end();
     });
 };
