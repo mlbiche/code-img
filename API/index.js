@@ -1,5 +1,11 @@
+/**
+ * index.js
+ * 
+ * Start the API server and define the RESTful API routes
+ */
+
 const express = require('express');
-const db = require('./model/db'); // Load the MongoDB database
+require('./model/db'); // Load the MongoDB database
 const { body, query, param } = require('express-validator');
 const cors = require('cors');
 const loginEndpointCallback = require('./routes/login');
@@ -9,6 +15,7 @@ const discussionsEndpointCallback = require('./routes/discussions');
 const discussionResponsesEndpointCallback = require('./routes/discussionResponses');
 
 const PORT = 8080;
+const FRONT_END_URL = 'http://localhost:3000';
 
 const app = express();
 
@@ -22,7 +29,7 @@ app.use(express.json());
  * Developped using https://enable-cors.org/server_expressjs.html
  */
 var corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: FRONT_END_URL,
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
   credentials: true
 };
@@ -72,7 +79,7 @@ app.get('/discussion/:discussionId',
     param('discussionId').isLength({ min: 24, max: 24 })
   ],
   discussionResponsesEndpointCallback
-)
+);
 
 // Launch the server
 app.listen(PORT, () => {
