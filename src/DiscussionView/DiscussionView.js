@@ -1,19 +1,30 @@
+/**
+ * DiscussionView component
+ * 
+ * Display a discussion thread
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 import { Container, Row } from 'react-bootstrap';
+import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 
 /**
  * DiscussionView component
- * @param match The React router match object that contains the discussion id
- *              in the params 
+ * @param props 
+ *    - The React router match object that contains the discussion id in the params 
  */
 class DiscussionView extends Component {
   constructor(props) {
     super(props);
+    
     this.state = { responses: [] };
   }
 
+  /**
+   * Load the response list of the discussion before rendering
+   * 
+   * Developped using https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
+   */
   componentDidMount() {
     fetch(
       `http://localhost:8080/discussion/${this.props.match.params.id}`,
@@ -59,7 +70,6 @@ class DiscussionView extends Component {
     );
   }
 }
-
 
 /**
  * Define the component property types

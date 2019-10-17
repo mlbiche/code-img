@@ -18,9 +18,10 @@ export const SCORE_TYPE = {
 
 /**
  * UserScore component
- * @param type The score type. Only UPLOAD_SCORE or REACTION_SCORE values are allowed
- * @param username The user related to the score
- * @param score The score number
+ * @param props
+ *    - type: The score type. Only UPLOAD_SCORE or REACTION_SCORE values are allowed
+ *    - username: The user related to the score
+ *    - score: The score number
  */
 function UserScore({ type, username, score }) {
   return (
