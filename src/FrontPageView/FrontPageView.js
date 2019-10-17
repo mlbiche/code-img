@@ -1,13 +1,22 @@
+/**
+ * FrontPageView component
+ * 
+ * Define the FrontPageView component containing the discussions
+ */
 import React, { Component } from 'react';
-import Discussion from '../Discussion/Discussion';
-import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
-import './FrontPageView.css';
 import { Container, Col, Row } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import Discussion from '../Discussion/Discussion';
+import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
+
+import './FrontPageView.css';
 
 const PAGE_INIT_NUM = 1;
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 15;
 
+/**
+ * FontPageView component
+ */
 class FrontPageView extends Component {
   constructor(props) {
     super(props);
@@ -109,6 +118,7 @@ class FrontPageView extends Component {
             <h2>Discussions</h2>
           </Col>
         </Row>
+        {/* Discussion list */}
         <Row>
           {
             this.state.discussions.map((discussion) => (
@@ -122,8 +132,9 @@ class FrontPageView extends Component {
             ))
           }
         </Row>
+        {/* Pagination */}
         <Row>
-          <Col className='front-page-pagination-col'>
+          <Col className="front-page-pagination-col">
             {/*
               Developed using https://www.npmjs.com/package/react-paginate and 
               https://github.com/AdeleD/react-paginate/blob/master/demo/js/demo.js
