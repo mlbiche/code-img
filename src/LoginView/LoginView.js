@@ -88,7 +88,7 @@ class LoginView extends Component {
         }
       })
       .catch(err => {
-        console.log('Registration fetch error');
+        console.log('Login fetch error');
         console.log(err);
       });
   };

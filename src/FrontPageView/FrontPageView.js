@@ -8,6 +8,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import Discussion from '../Discussion/Discussion';
 import FrontPageNavBar from '../FrontPageNavBar/FrontPageNavBar';
+import { getDiscussionsPage } from '../services/DiscussionService';
 
 import './FrontPageView.css';
 
@@ -45,50 +46,23 @@ class FrontPageView extends Component {
    * Fetch the discussions from the page stored in the state
    */
   fetchDiscussions() {
-    /**
-     * Prepare the URL with page parameters
-     * 
-     * Developped using https://fetch.spec.whatwg.org/#fetch-api
-     */
-    const url = new URL('http://localhost:8080/discussions');
-    const params = { pageNum: this.state.pageNum, pageSize: this.state.pageSize };
-
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-
-    // Fetch the discussions
-    fetch(url,
-      {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      }
-    )
-      .then(res => {
-        // Check the response status
-        switch (res.status) {
-          case 200:
-            // If response has succeeded, parse the JSON response
-            return res.json();
-          default:
-            throw new Error('Fetching discussions has failed');
+    getDiscussionsPage(this.state.pageNum, this.state.pageSize)
+      .then(({ statusCode, discussions, pageMax }) => {
+        if (statusCode === 200) {
+          // Update the state with the received discussions and the pageMax
+          this.setState(
+            {
+              discussions: discussions,
+              pageMax: pageMax
+            },
+            () => { window.scrollTo(0, 0); }
+          );
+        } else {
+          throw new Error('Fetching discussions has failed');
         }
       })
-      .then(resObj => {
-        // Update all dates to JS Date objects
-        resObj.discussions.map(discussion => {
-          discussion.firstResponse.date = new Date(discussion.firstResponse.date);
-          return discussion;
-        });
-
-        // Update the state with the received discussions and the pageMax
-        this.setState(
-          {
-            discussions: resObj.discussions,
-            pageMax: resObj.pageMax
-          },
-          () => { window.scrollTo(0, 0); }
-        );
-      })
       .catch(err => {
+        console.log('Discussions fetch error');
         console.log(err.message);
       });
   }
