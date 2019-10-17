@@ -28,7 +28,7 @@ The entire project shoudl respect the following defined coding conventions :
 * Components corresponding to a route have name ending with *View*.<br />
 *Ex : `LeaderboardView`*
 * The default export for components JavaScript file is the last line of the file, seperated by an empty line from the rest of the code.
-* All component JavaScript files must be documented, with at list a header comment on top of the class or function definition.
+* All component JavaScript files must be documented, with at least a header comment on top of the class or function definition.
 * Components are defined using function as often as it is enough.
 * All JavaScript functions must have a header comment defining the function purpose, parameters and the return.
 * For classes and functions definitions, conditional and loop statements and CSS rules, the opening curly brace is placed at the end of the line, seperated by a space.<br />

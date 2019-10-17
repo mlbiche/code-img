@@ -32,3 +32,28 @@ export async function registerUser(username, email, password) {
     throw err;
   }
 }
+
+/**
+ * Login a user
+ * @param email The user email
+ * @param password The user password
+ */
+export async function loginUser(email, password) {
+  // Post request to backend
+  try {
+    // Fetch the login post request
+    const res = fetch(API_URL + 'login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+      credentials: 'include' // Allow to receive a Cross-Origin cookie
+    });
+
+    return res.status;
+  } catch (err) {
+    throw err;
+  }
+}

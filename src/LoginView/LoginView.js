@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import { Form, Container, Col, Row, Button, Alert } from 'react-bootstrap';
+import { loginUser } from '../services/UserService';
 
 /**
  * LoginView component
@@ -53,41 +54,59 @@ class LoginView extends Component {
     // Prevent page refreshing, not needed in single page web application
     event.preventDefault();
 
-    // Fetch the Form data
-    fetch('http://localhost:8080/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password
-      }),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include' // Allow to receive a Cross-Origin cookie
-    })
-      .then(res => {
-        // Empty the Form
-        this.emailInput.value = '';
-        this.passwordInput.value = '';
-        this.setState({ email: '', password: '' });
+    // Login the user
+    loginUser(this.state.email, this.state.password)
+      .then(statusCode => {
+        // Reinitialise the form as the data has been fetched
+        this.reinitialiseForm();
 
-        switch (res.status) {
+        switch (statusCode) {
           case 200:
             // Show the success alert
-            this.setState({ showConnectionSuccessAlert: true });
+            this.setState({
+              message: 'You are successfully connected!',
+              messageCode: statusCode
+            });
             break;
           case 422:
           case 401:
             // Show the wrong credentials alert
-            this.setState({ showConnectionWrongCredentialsAlert: true });
+            this.setState({
+              message: 'You have entered wrong email or password.',
+              messageCode: statusCode
+            });
             break;
           case 500:
             // Show the internal error alert
-            this.setState({ showConnectionServerFailAlert: true });
+            this.setState({
+              message: 'Your connection has failed because of an internal error.',
+              messageCode: statusCode
+            });
             break;
           default:
             break;
         }
+      })
+      .catch(err => {
+        console.log('Registration fetch error');
+        console.log(err);
       });
   };
+
+  /**
+   * Reinitialise the form inputs and the the state
+   */
+  reinitialiseForm() {
+    // Empty the fileds
+    this.emailInput.value = '';
+    this.passwordInput.value = '';
+
+    // Reinitialise the state
+    this.setState({
+      email: '',
+      password: ''
+    });
+  }
 
   render() {
     return (
@@ -96,9 +115,12 @@ class LoginView extends Component {
         <Row>
           <Col>
             {
-              <Alert variant={this.state.messageCode === 200 ? 'success' : 'danger'}>
-                {this.state.message}
-              </Alert>
+              this.state.message &&
+              (
+                <Alert variant={this.state.messageCode === 200 ? 'success' : 'danger'}>
+                  {this.state.message}
+                </Alert>
+              )
             }
           </Col>
         </Row>

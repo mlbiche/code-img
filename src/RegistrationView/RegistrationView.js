@@ -66,9 +66,7 @@ class RegistrationView extends Component {
     // Prevent the page refreshing, not needed in single page web application
     event.preventDefault();
 
-    /**
-     * Register the new user
-     */
+    // Register the new user
     registerUser(this.state.username, this.state.email, this.state.password)
       .then(statusCode => {
         // Reinitialise the form as the data has been fetched
@@ -118,7 +116,8 @@ class RegistrationView extends Component {
     // Reinitialise the state
     this.setState({
       email: '',
-      password: ''
+      password: '',
+      username: ''
     });
   }
 
