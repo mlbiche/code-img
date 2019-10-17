@@ -24,7 +24,7 @@ const responseSchema = new mongoose.Schema({
 });
 
 /**
- * This schema doe not correspond to a collection so we export its schema to be used
+ * This schema does not correspond to a collection so we export its schema to be used
  * in another schema.
  */
 module.exports.ResponseSchema = responseSchema;
