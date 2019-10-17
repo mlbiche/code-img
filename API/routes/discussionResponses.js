@@ -11,7 +11,7 @@ const { Discussion } = require('../model/schema/discussion');
 /**
  * GET /discussion/:discussionId endpoint callback
  * List all responses of of the discussion :discussionId
- * @param req The request
+ * @param req The request. It must contains the discussionId in the params
  * @param res The response. 200 on success with the response list as JSON, 404 if the discussion is not found, 500 if internal error
  */
 module.exports = (req, res) => {
@@ -25,9 +25,10 @@ module.exports = (req, res) => {
   if (!errors.isEmpty()) {
     // Display the error in the API console
     console.log('GET /discussion/:discussionId validation failed : sending 422 HTTP code...');
+    console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).end();
   }
 
   const discussionId = new mongoose.Types.ObjectId(req.params.discussionId);
@@ -75,8 +76,6 @@ module.exports = (req, res) => {
       console.log(`Discussion aggregation failure : internal error...`);
 
       // An internal error happened
-      return res.status(500).json({
-        error: err
-      });
+      return res.status(500).end();
     });
 }
