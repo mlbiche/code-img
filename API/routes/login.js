@@ -13,9 +13,9 @@ const CredentialsMismatchError = require('../common/errors/credentialsMismatchEr
 /**
  * POST /login endpoint callback
  * Log in a user
- * @param req The request. The body must contains :
- *   - email : string, the user email
- *   - password : string, the hashed salted password
+ * @param req The request. The body must contains:
+ *   - email: string, the user email
+ *   - password: string, the hashed salted password
  * @param res The response. 200 on success, 422 if invalid request, 401 if invalid credentials, 500 if internal error
  */
 module.exports = async (req, res) => {
@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('POST /login validation failed : sending 422 HTTP code...');
+    console.log('POST /login validation failed: sending 422 HTTP code...');
     console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
@@ -61,14 +61,14 @@ module.exports = async (req, res) => {
     switch (err.name) {
       case CredentialsMismatchError.name:
         // The login has failed because of a credentials mismatch
-        console.log(`Connection failure : credentials mismatch (email: ${req.body.email})...`);
+        console.log(`Connection failure: credentials mismatch (email: ${req.body.email})...`);
 
         // Send Unauthorized 401 HTTP code
         res.status(401).end();
         break;
       default:
         // The login has failed for an other reason (e.g. DB access failure, ...)
-        console.log(`Connection failure : internal error (email: ${req.body.email})...`);
+        console.log(`Connection failure: internal error (email: ${req.body.email})...`);
 
         // Send Internal Server Error 500 Error HTTP code
         res.status(500).end();
@@ -114,10 +114,10 @@ async function checkCredentials(email, password) {
  * @returns The generated token if success ; Raise an Error on failure
  */
 async function generateToken(userId) {
-  try {
-    // Generate random secret key for encrypting the JSON Web Token
-    const secretKey = require('crypto').randomBytes(64).toString('hex');
+  // Generate random secret key for encrypting the JSON Web Token
+  const secretKey = require('crypto').randomBytes(64).toString('hex');
   
+  try {
     // Update the user with the generated secret key
     await User.updateOne({ _id: userId }, { secretKey: secretKey })
     // Throw an Error when the MongoDB query fails

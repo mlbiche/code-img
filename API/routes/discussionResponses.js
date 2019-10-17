@@ -24,7 +24,7 @@ module.exports = (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('GET /discussion/:discussionId validation failed : sending 422 HTTP code...');
+    console.log('GET /discussion/:discussionId validation failed: sending 422 HTTP code...');
     console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
@@ -61,7 +61,7 @@ module.exports = (req, res) => {
     .then(discussions => {
       if (discussions.length === 0) {
         // The discussion does not exist. Display the error in the API console
-        console.log(`Discussion ${discussionId} not found : sending 404 HTTP code...`);
+        console.log(`Discussion ${discussionId} not found: sending 404 HTTP code...`);
 
         return res.status(404).end();
       }
@@ -73,7 +73,7 @@ module.exports = (req, res) => {
       }
     })
     .catch(err => {
-      console.log(`Discussion aggregation failure : internal error...`);
+      console.log(`Discussion aggregation failure: internal error...`);
 
       // An internal error happened
       return res.status(500).end();

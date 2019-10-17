@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('GET /discussions validation failed : sending 422 HTTP code...');
+    console.log('GET /discussions validation failed: sending 422 HTTP code...');
     console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
       pageMax: pageMax
     });
   } catch (err) {
-    console.log(`Discussion aggregation failure : internal error...`);
+    console.log(`Discussion aggregation failure: internal error...`);
     console.log(err);
 
     // Send Internal Server Error 500 Error HTTP code
