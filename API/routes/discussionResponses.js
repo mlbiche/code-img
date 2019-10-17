@@ -51,7 +51,7 @@ module.exports = (req, res) => {
           'in': {
             '_id': '$$response._id',
             'user': '$$response.user',
-            'imageUrl': '$$response.imageUrl',
+            'imgUrl': '$$response.imgUrl',
             'date': { $toDate: '$$response._id' } // The added date field
           }
         }

@@ -17,7 +17,7 @@ const responseSchema = new mongoose.Schema({
       required: true
     }
   },
-  imageUrl: {
+  imgUrl: {
     type: String,
     required: true
   }

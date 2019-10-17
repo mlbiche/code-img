@@ -96,7 +96,7 @@ class FrontPageView extends Component {
                 id={discussion._id}
                 username={discussion.firstResponse.user.username}
                 date={discussion.firstResponse.date}
-                img={discussion.firstResponse.imageUrl}
+                img={discussion.firstResponse.imgUrl}
                 key={discussion._id}
               />
             ))

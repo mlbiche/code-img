@@ -46,7 +46,7 @@ class DiscussionView extends Component {
             <DiscussionResponse
               username={response.user.username}
               date={response.date}
-              img={response.imageUrl}
+              img={response.imgUrl}
               key={response._id}
             />
           ))}
