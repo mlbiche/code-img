@@ -10,7 +10,7 @@ const { User } = require('../model/schema/user');
 module.exports = async (req, res) => {
     /**
      * Check if validation has failed
-     * developed usig https://github.com/github/fetch#post-form 
+     * 
      * Developped using https://express-validator.github.io/docs/index.html#basic-guide
      */
     const errors = validationResult(req);
@@ -26,30 +26,27 @@ module.exports = async (req, res) => {
         const user = await User.find().or([
             { email: req.body.email },
             { username: req.body.username }
-        ])
+        ]);
+
         // issue if the user exists before
         if (user.length >= 1) { //check the array lentgh of the email address if we already have it in the database
             //409 means conflicts user already exist in the database;
             return res.status(409).end();
         } else {
-            try {
-                // create a new user with a hash password
-                const hashPassword = await argon2.hash(req.body.password)
-                // no error have a hash password and we store it in the database
-                const user = new User({
-                    email: req.body.email,
-                    password: hash,
-                    username: req.body.username
-                });// hash the password with the bcrypt library
-                const result = await user.save();
-                console.log(result);// log the created user
-                res.status(201).end();
-            } catch (err) {
-                console.log(err);
-                res.status(500).json({
-                    error: err
-                });
-            }
+            // create a new user with a hash password
+            const hash = await argon2.hash(req.body.password);
+
+            // no error have a hash password and we store it in the database
+            const user = new User({
+                email: req.body.email,
+                password: hash,
+                username: req.body.username
+            });// hash the password with the bcrypt library
+
+            const result = await user.save();
+            console.log(result);// log the created user
+            
+            res.status(201).end();
         }
     } catch (err) {
         return res.status(500).json({
