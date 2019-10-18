@@ -1,3 +1,8 @@
+/**
+ * DiscussionResponse component
+ * 
+ * Display a response in the discussion thread
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-bootstrap';
@@ -6,12 +11,12 @@ import './DiscussionResponse.css';
 
 /**
  * DiscussionResponse component
- * @param username The response author name
- * @param date The date on which the response has been posted
- * @param img The response image
- * @param reactions The reactions given to the response
+ * @param props
+ *    - username: The response author name
+ *    - date: The date on which the response has been posted
+ *    - img: The response image
  */
-function DiscussionResponse({ username, date, img, reactions }) {
+function DiscussionResponse({ username, date, img }) {
   return (
     <Col lg={7} xs={12} className="discussion-response-col">
       <div>
@@ -28,13 +33,11 @@ function DiscussionResponse({ username, date, img, reactions }) {
 
 /**
  * Define the component property types
- * The type property only accept UPLOAD_SCORE and REACTION_SCORE values
  */
 DiscussionResponse.propTypes = {
   username: PropTypes.string.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   img: PropTypes.string.isRequired,
-  reactions: PropTypes.array.isRequired // TODO : Improve this property type
 };
 
 export default DiscussionResponse;

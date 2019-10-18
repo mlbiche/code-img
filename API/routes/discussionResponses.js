@@ -11,7 +11,7 @@ const { Discussion } = require('../model/schema/discussion');
 /**
  * GET /discussion/:discussionId endpoint callback
  * List all responses of of the discussion :discussionId
- * @param req The request
+ * @param req The request. It must contains the discussionId in the params
  * @param res The response. 200 on success with the response list as JSON, 404 if the discussion is not found, 500 if internal error
  */
 module.exports = (req, res) => {
@@ -24,10 +24,11 @@ module.exports = (req, res) => {
 
   if (!errors.isEmpty()) {
     // Display the error in the API console
-    console.log('GET /discussion/:discussionId validation failed : sending 422 HTTP code...');
+    console.log('GET /discussion/:discussionId validation failed: sending 422 HTTP code...');
+    console.log(errors.array());
 
     // Send back a 422 HTTP Error code (Unprocessable entity)
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).end();
   }
 
   const discussionId = new mongoose.Types.ObjectId(req.params.discussionId);
@@ -50,7 +51,7 @@ module.exports = (req, res) => {
           'in': {
             '_id': '$$response._id',
             'user': '$$response.user',
-            'imageUrl': '$$response.imageUrl',
+            'imgUrl': '$$response.imgUrl',
             'date': { $toDate: '$$response._id' } // The added date field
           }
         }
@@ -60,7 +61,7 @@ module.exports = (req, res) => {
     .then(discussions => {
       if (discussions.length === 0) {
         // The discussion does not exist. Display the error in the API console
-        console.log(`Discussion ${discussionId} not found : sending 404 HTTP code...`);
+        console.log(`Discussion ${discussionId} not found: sending 404 HTTP code...`);
 
         return res.status(404).end();
       }
@@ -72,11 +73,9 @@ module.exports = (req, res) => {
       }
     })
     .catch(err => {
-      console.log(`Discussion aggregation failure : internal error...`);
+      console.log(`Discussion aggregation failure: internal error...`);
 
       // An internal error happened
-      return res.status(500).json({
-        error: err
-      });
+      return res.status(500).end();
     });
 }

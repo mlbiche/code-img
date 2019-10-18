@@ -2,31 +2,13 @@
   margin-bottom: 2rem;
 }
 
-.front-page-pagination-col {
-  display: flex;
-  justify-content: center;
-}
-
-#discussion-title-col {
+.frontpage-title-col {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.frontpage-row {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .frontpage-title-col {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-
-#front-page-container > #front-page-discussions-container {
+.front-page-pagination-col {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
-

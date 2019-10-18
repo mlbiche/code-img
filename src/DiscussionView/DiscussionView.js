@@ -1,42 +1,39 @@
+/**
+ * DiscussionView component
+ * 
+ * Display a discussion thread
+ */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
 import { Container, Row } from 'react-bootstrap';
+import DiscussionResponse from '../DiscussionResponse/DiscussionResponse';
+import { getDiscussionResponses } from '../services/DiscussionService';
 
 /**
  * DiscussionView component
- * @param match The React router match object that contains the discussion id
- *              in the params 
+ * @param props 
+ *    - The React router match object that contains the discussion id in the params 
  */
 class DiscussionView extends Component {
   constructor(props) {
     super(props);
+
     this.state = { responses: [] };
   }
 
+  /**
+   * Load the response list of the discussion before rendering
+   * 
+   * Developped using https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
+   */
   componentDidMount() {
-    fetch(
-      `http://localhost:8080/discussion/${this.props.match.params.id}`,
-      {
-        method: 'GET',
-        headers: { 'Content-type': 'application/json' }
+    getDiscussionResponses(this.props.match.params.id)
+      .then(responses => {
+        this.setState({ responses: responses });
       })
-      .then(res => {
-        switch (res.status) {
-          case 200:
-            return res.json();
-          default:
-            throw new Error('Fetching responses has failed');
-        }
-      })
-      .then(resObj => {
-        // Convert the text date to a JavaScript Date object in each response object
-        resObj.responses.map(response => {
-          response.date = new Date(response.date);
-          return response;
-        });
-
-        this.setState({ responses: resObj.responses });
+      .catch(err => {
+        console.log('getDiscussionResponses error');
+        console.log(err.message);
       });
   }
 
@@ -49,8 +46,7 @@ class DiscussionView extends Component {
             <DiscussionResponse
               username={response.user.username}
               date={response.date}
-              img={response.imageUrl}
-              reactions={[]}
+              img={response.imgUrl}
               key={response._id}
             />
           ))}
@@ -59,7 +55,6 @@ class DiscussionView extends Component {
     );
   }
 }
-
 
 /**
  * Define the component property types

@@ -10,26 +10,26 @@ The front-end is developped using React.js and the RESTful API *(see folder `/AP
 
 ## Coding conventions
 
-The entire project shoudl respect the following defined coding conventions :
+The entire project shoudl respect the following defined coding conventions:
 
 * Indentation is composed by two spaces, as defined by React.js.
 * Components `.js` and `.css` files are placed in a same folder specific to the component.
-* JavaScript code use single quote for string while HTML code use double quotes.<br />
+* JavaScript code uses single quote for string while JSX code uses double quotes.<br />
 *Ex: `import './Leaderboard.css'` / `<div id="my-id"></div>`*
 * Method names do not start with an underscore.
 * Folder and file names use Pascal Case. <br />
 *Ex: `FrontPageView.js`*
 * CSS stylesheet is the last import in `.js` file, seperated by an empty line from other imports.
 * JavaScript variable names use Lower Camel Case.<br />
-*Ex : `const myVariable = 2;`*
+*Ex: `const myVariable = 2;`*
 * JavaScript lines end with a semi-colon.
 * HTML/CSS `id`s and `class`es names use lower case letters and each composing word is separated with a dash.<br />
-*Ex : `<div id="my-id"></div>`*
+*Ex: `<div id="my-id"></div>`*
 * Components corresponding to a route have name ending with *View*.<br />
-*Ex : `LeaderboardView`*
+*Ex: `LeaderboardView`*
 * The default export for components JavaScript file is the last line of the file, seperated by an empty line from the rest of the code.
-* All component JavaScript files must be documented, with at list a header comment on top of the class or function definition.
-* Components are defined using function as often as it is enough.
+* All component JavaScript files must be documented, with at least a header comment on top of the class or function definition.
+* Components are defined using a function as often as it is enough.
 * All JavaScript functions must have a header comment defining the function purpose, parameters and the return.
 * For classes and functions definitions, conditional and loop statements and CSS rules, the opening curly brace is placed at the end of the line, seperated by a space.<br />
 *Ex : `function LeaderboardView() {`*
@@ -45,6 +45,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+**WARNING: Before launching the Web Application, be sure you have started the database and the API *(see `npm run start-db` and `npm run start-api` below)*.**
 
 ### `npm test`
 
